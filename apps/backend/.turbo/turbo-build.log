@@ -1,0 +1,10 @@
+
+
+> server@0.0.1 prebuild /home/patryk/projects/random-quiz-generator/apps/backend
+> rimraf dist
+
+
+> server@0.0.1 build /home/patryk/projects/random-quiz-generator/apps/backend
+> nest build
+
+[33mDeprecationWarning: 'getMutableClone' has been deprecated since v4.0.0. Use an appropriate `factory.update...` method instead, use `setCommentRange` or `setSourceMapRange`, and avoid setting `parent`.[39m

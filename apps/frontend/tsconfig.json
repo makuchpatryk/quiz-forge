@@ -1,0 +1,30 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "allowJs": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": [
+      "node",
+      "nuxt",
+      "vite/client"
+    ]
+  },
+  "include": [
+    ".nuxt",
+    "nuxt.config.ts",
+    "app.vue",
+    "modules",
+    "plugins",
+    "composables",
+    "components"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

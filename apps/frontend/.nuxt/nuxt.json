@@ -1,0 +1,9 @@
+{
+  "_hash": "OLA9GoBNVwAQigQ42FAN-Ivutmy_6MW5bD96W5JydFU",
+  "project": {
+    "rootDir": "/home/patryk/projects/random-quiz-generator/apps/frontend"
+  },
+  "versions": {
+    "nuxt": "3.16.0"
+  }
+}
