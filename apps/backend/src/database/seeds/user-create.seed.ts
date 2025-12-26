@@ -1,17 +1,20 @@
-import { Connection, getManager } from 'typeorm';
-import { Factory, Seeder } from 'typeorm-seeding';
-import { UserRoles } from '../../modules/user/enums/user.enum';
-import { User } from '../../modules/user/user.entity';
+import { DataSource } from "typeorm";
+import { Seeder } from "typeorm-extension";
+import { UserRoles } from "../../modules/user/enums/user.enum";
+import { User } from "../../modules/user/user.entity";
 
 export class UserCreateSeed implements Seeder {
-  public async run(factory: Factory, connection: Connection): Promise<void> {
-    await getManager().query('TRUNCATE users');
-    await factory(User)().create({
-      name: 'Amitav Roy',
-      email: 'reachme@amitavroy.com',
-      password: 'Password@123',
-      role: UserRoles.ADMIN,
-    });
-    // await factory(User)().createMany(20);
+  public async run(dataSource: DataSource): Promise<void> {
+    console.log("Running UserCreateSeed...");
+    const repo = dataSource.getRepository(User);
+    if (!(await repo.findOne({ where: { email: "admin@admin.com" } }))) {
+      const user = repo.create({
+        name: "Amitav Roy",
+        email: "admin@admin.com",
+        password: "Password@123",
+        role: UserRoles.ADMIN,
+      });
+      await repo.save(user);
+    }
   }
 }

@@ -53,7 +53,7 @@
         "../../../node_modules/.pnpm/nuxt@3.19.2_@parcel+watcher@2.5.1_@types+node@20.19.17_@vue+compiler-sfc@3.5.22_db0@0.3.2_esl_ukqhsfz7ar3yzw23oeaguszyza/node_modules/nuxt"
       ],
       "vite/client": [
-        "../../../node_modules/.pnpm/vite@7.1.7_@types+node@17.0.45_jiti@2.6.0_sass@1.93.2_terser@5.44.0_yaml@2.8.1/node_modules/vite/client"
+        "../../../node_modules/.pnpm/vite@7.1.7_@types+node@17.0.45_jiti@2.6.1_sass@1.93.2_terser@5.44.0_tsx@4.21.0_yaml@2.8.1/node_modules/vite/client"
       ],
       "~": [
         ".."
@@ -116,7 +116,7 @@
         "./imports"
       ],
       "#app-manifest": [
-        "./manifest/meta/287bca01-7367-4611-b2bf-28047be610cc.json"
+        "./manifest/meta/8027d6ef-103a-4f5c-b2eb-3d8e0b41c216.json"
       ],
       "#components": [
         "./components"

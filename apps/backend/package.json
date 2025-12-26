@@ -19,12 +19,13 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migration:generate": "ts-node -P ./tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate -d ./src/config/typeorm.config-migrations.ts ./src/database/migrations/migrate",
-    "migration:create": "ts-node -P ./tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create -d ./src/config/typeorm.config-migrations.ts",
-    "migration:run": "ts-node -P ./tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/config/typeorm.config-migrations.ts",
-    "migration:revert": "ts-node -P ./tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d ./src/config/typeorm.config-migrations.ts",
-    "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n src/config/typeorm.config-migrations.ts",
-    "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/config/typeorm.config-migrations.ts",
+    "typeorm": "npx ts-node -P ./tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm-extension": "npx ts-node-esm -P ./tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm-extension/bin/cli.mjs",
+    "migration:generate": "pnpm run typeorm migration:generate -d ./src/config/typeorm.config-migrations.ts ./src/database/migrations/migrate",
+    "migration:create": "pnpm run typeorm migration:create -d ./src/config/typeorm.config-migrations.ts",
+    "migration:run": "pnpm run typeorm migration:run -d ./src/config/typeorm.config-migrations.ts",
+    "migration:revert": "pnpm run typeorm  migration:revert -d ./src/config/typeorm.config-migrations.ts",
+    "seed": "pnpm run typeorm-extension seed:run -d 'src/config/typeorm.config-migrations.ts'",
     "db:refresh": "pnpm run typeorm:cli schema:drop && pnpm run migration:run && pnpm run seed:run"
   },
   "dependencies": {
@@ -50,7 +51,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.5",
     "swagger-ui-express": "^4.3.0",
-    "typeorm-seeding": "^1.6.1",
+    "typeorm-extension": "^3.7.3",
     "typeorm-ts-node-commonjs": "^0.3.20",
     "typeorm-ts-node-esm": "^0.3.20"
   },
@@ -77,8 +78,9 @@
     "ts-loader": "^9.2.8",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.14.1",
+    "tsx": "^4.21.0",
     "typeorm": "^0.3.27",
-    "typescript": "^4.6.3",
+    "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   }
 }

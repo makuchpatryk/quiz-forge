@@ -7,4 +7,460 @@
 > server@0.0.1 build /home/patryk/projects/random-quiz-generator/apps/backend
 > nest build
 
-[33mDeprecationWarning: 'getMutableClone' has been deprecated since v4.0.0. Use an appropriate `factory.update...` method instead, use `setCommentRange` or `setSourceMapRange`, and avoid setting `parent`.[39m
+DeprecationWarning: 'getMutableClone' has been deprecated since v4.0.0. Use an appropriate `factory.update...` method instead, use `setCommentRange` or `setSourceMapRange`, and avoid setting `parent`.
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3081[0m:[93m13[0m - [91merror[0m[90m TS1139: [0mType parameter declaration expected.
+
+[7m3081[0m     shuffle<const T>(list: T[], options: {
+[7m    [0m [91m            ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3081[0m:[93m19[0m - [91merror[0m[90m TS1434: [0mUnexpected keyword or identifier.
+
+[7m3081[0m     shuffle<const T>(list: T[], options: {
+[7m    [0m [91m                  ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3081[0m:[93m20[0m - [91merror[0m[90m TS1068: [0mUnexpected token. A constructor, method, accessor, or property was expected.
+
+[7m3081[0m     shuffle<const T>(list: T[], options: {
+[7m    [0m [91m                   ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3081[0m:[93m26[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3081[0m     shuffle<const T>(list: T[], options: {
+[7m    [0m [91m                         ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3081[0m:[93m30[0m - [91merror[0m[90m TS1011: [0mAn element access expression should take an argument.
+
+[7m3081[0m     shuffle<const T>(list: T[], options: {
+[7m    [0m [91m                             [0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3081[0m:[93m40[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3081[0m     shuffle<const T>(list: T[], options: {
+[7m    [0m [91m                                       ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3088[0m:[93m6[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3088[0m     }): T[];
+[7m    [0m [91m     ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3088[0m:[93m7[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3088[0m     }): T[];
+[7m    [0m [91m      ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3088[0m:[93m11[0m - [91merror[0m[90m TS1011: [0mAn element access expression should take an argument.
+
+[7m3088[0m     }): T[];
+[7m    [0m [91m          [0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3104[0m:[93m13[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3104[0m     shuffle<const T>(list: ReadonlyArray<T>, options?: {
+[7m    [0m [91m            ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3104[0m:[93m20[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3104[0m     shuffle<const T>(list: ReadonlyArray<T>, options?: {
+[7m    [0m [91m                   ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3104[0m:[93m26[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3104[0m     shuffle<const T>(list: ReadonlyArray<T>, options?: {
+[7m    [0m [91m                         ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3104[0m:[93m54[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3104[0m     shuffle<const T>(list: ReadonlyArray<T>, options?: {
+[7m    [0m [91m                                                     ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3110[0m:[93m24[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3110[0m         inplace?: false;
+[7m    [0m [91m                       ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3111[0m:[93m6[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3111[0m     }): T[];
+[7m    [0m [91m     ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3111[0m:[93m7[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3111[0m     }): T[];
+[7m    [0m [91m      ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3111[0m:[93m11[0m - [91merror[0m[90m TS1011: [0mAn element access expression should take an argument.
+
+[7m3111[0m     }): T[];
+[7m    [0m [91m          [0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3128[0m:[93m13[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3128[0m     shuffle<const T>(list: T[], options?: {
+[7m    [0m [91m            ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3128[0m:[93m20[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3128[0m     shuffle<const T>(list: T[], options?: {
+[7m    [0m [91m                   ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3128[0m:[93m26[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3128[0m     shuffle<const T>(list: T[], options?: {
+[7m    [0m [91m                         ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3128[0m:[93m30[0m - [91merror[0m[90m TS1011: [0mAn element access expression should take an argument.
+
+[7m3128[0m     shuffle<const T>(list: T[], options?: {
+[7m    [0m [91m                             [0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3128[0m:[93m41[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3128[0m     shuffle<const T>(list: T[], options?: {
+[7m    [0m [91m                                        ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3134[0m:[93m26[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3134[0m         inplace?: boolean;
+[7m    [0m [91m                         ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3135[0m:[93m6[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3135[0m     }): T[];
+[7m    [0m [91m     ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3135[0m:[93m7[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3135[0m     }): T[];
+[7m    [0m [91m      ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3135[0m:[93m11[0m - [91merror[0m[90m TS1011: [0mAn element access expression should take an argument.
+
+[7m3135[0m     }): T[];
+[7m    [0m [91m          [0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3158[0m:[93m17[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3158[0m     uniqueArray<const T>(source: ReadonlyArray<T> | (() => T), length: number): T[];
+[7m    [0m [91m                ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3158[0m:[93m24[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3158[0m     uniqueArray<const T>(source: ReadonlyArray<T> | (() => T), length: number): T[];
+[7m    [0m [91m                       ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3158[0m:[93m32[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3158[0m     uniqueArray<const T>(source: ReadonlyArray<T> | (() => T), length: number): T[];
+[7m    [0m [91m                               ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3158[0m:[93m70[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3158[0m     uniqueArray<const T>(source: ReadonlyArray<T> | (() => T), length: number): T[];
+[7m    [0m [91m                                                                     ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3158[0m:[93m72[0m - [91merror[0m[90m TS1434: [0mUnexpected keyword or identifier.
+
+[7m3158[0m     uniqueArray<const T>(source: ReadonlyArray<T> | (() => T), length: number): T[];
+[7m    [0m [91m                                                                       ~~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3158[0m:[93m78[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3158[0m     uniqueArray<const T>(source: ReadonlyArray<T> | (() => T), length: number): T[];
+[7m    [0m [91m                                                                             ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3158[0m:[93m79[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3158[0m     uniqueArray<const T>(source: ReadonlyArray<T> | (() => T), length: number): T[];
+[7m    [0m [91m                                                                              ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3158[0m:[93m83[0m - [91merror[0m[90m TS1011: [0mAn element access expression should take an argument.
+
+[7m3158[0m     uniqueArray<const T>(source: ReadonlyArray<T> | (() => T), length: number): T[];
+[7m    [0m [91m                                                                                  [0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3175[0m:[93m18[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3175[0m     mustache(text: string | undefined, data: Record<string, string | Parameters<string['replace']>[1]>): string;
+[7m    [0m [91m                 ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3175[0m:[93m44[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3175[0m     mustache(text: string | undefined, data: Record<string, string | Parameters<string['replace']>[1]>): string;
+[7m    [0m [91m                                           ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3175[0m:[93m104[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3175[0m     mustache(text: string | undefined, data: Record<string, string | Parameters<string['replace']>[1]>): string;
+[7m    [0m [91m                                                                                                       ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3192[0m:[93m11[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3192[0m     maybe<const TResult>(callback: () => TResult, options?: {
+[7m    [0m [91m          ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3192[0m:[93m24[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3192[0m     maybe<const TResult>(callback: () => TResult, options?: {
+[7m    [0m [91m                       ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3192[0m:[93m34[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3192[0m     maybe<const TResult>(callback: () => TResult, options?: {
+[7m    [0m [91m                                 ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3192[0m:[93m59[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3192[0m     maybe<const TResult>(callback: () => TResult, options?: {
+[7m    [0m [91m                                                          ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3198[0m:[93m29[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3198[0m         probability?: number;
+[7m    [0m [91m                            ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3199[0m:[93m6[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3199[0m     }): TResult | undefined;
+[7m    [0m [91m     ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3199[0m:[93m7[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3199[0m     }): TResult | undefined;
+[7m    [0m [91m      ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3214[0m:[93m15[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3214[0m     objectKey<const T extends Record<string, unknown>>(object: T): keyof T;
+[7m    [0m [91m              ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3214[0m:[93m23[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3214[0m     objectKey<const T extends Record<string, unknown>>(object: T): keyof T;
+[7m    [0m [91m                      ~~~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3214[0m:[93m37[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3214[0m     objectKey<const T extends Record<string, unknown>>(object: T): keyof T;
+[7m    [0m [91m                                    ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3214[0m:[93m44[0m - [91merror[0m[90m TS1005: [0m'>' expected.
+
+[7m3214[0m     objectKey<const T extends Record<string, unknown>>(object: T): keyof T;
+[7m    [0m [91m                                           ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3214[0m:[93m62[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3214[0m     objectKey<const T extends Record<string, unknown>>(object: T): keyof T;
+[7m    [0m [91m                                                             ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3214[0m:[93m64[0m - [91merror[0m[90m TS1434: [0mUnexpected keyword or identifier.
+
+[7m3214[0m     objectKey<const T extends Record<string, unknown>>(object: T): keyof T;
+[7m    [0m [91m                                                               ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3214[0m:[93m65[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3214[0m     objectKey<const T extends Record<string, unknown>>(object: T): keyof T;
+[7m    [0m [91m                                                                ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3214[0m:[93m66[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3214[0m     objectKey<const T extends Record<string, unknown>>(object: T): keyof T;
+[7m    [0m [91m                                                                 ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3214[0m:[93m68[0m - [91merror[0m[90m TS1434: [0mUnexpected keyword or identifier.
+
+[7m3214[0m     objectKey<const T extends Record<string, unknown>>(object: T): keyof T;
+[7m    [0m [91m                                                                   ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3229[0m:[93m17[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3229[0m     objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T];
+[7m    [0m [91m                ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3229[0m:[93m25[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3229[0m     objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T];
+[7m    [0m [91m                        ~~~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3229[0m:[93m39[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3229[0m     objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T];
+[7m    [0m [91m                                      ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3229[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m'>' expected.
+
+[7m3229[0m     objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T];
+[7m    [0m [91m                                             ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3229[0m:[93m64[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3229[0m     objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T];
+[7m    [0m [91m                                                               ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3229[0m:[93m66[0m - [91merror[0m[90m TS1434: [0mUnexpected keyword or identifier.
+
+[7m3229[0m     objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T];
+[7m    [0m [91m                                                                 ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3229[0m:[93m67[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3229[0m     objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T];
+[7m    [0m [91m                                                                  ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3229[0m:[93m68[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3229[0m     objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T];
+[7m    [0m [91m                                                                   ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3229[0m:[93m78[0m - [91merror[0m[90m TS1005: [0m']' expected.
+
+[7m3229[0m     objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T];
+[7m    [0m [91m                                                                             ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3229[0m:[93m79[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3229[0m     objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T];
+[7m    [0m [91m                                                                              ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m17[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m25[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                        ~~~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m39[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                                      ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m'>' expected.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                                             ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m64[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                                                               ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m66[0m - [91merror[0m[90m TS1434: [0mUnexpected keyword or identifier.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                                                                 ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m67[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                                                                  ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m68[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                                                                   ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m77[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                                                                            ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m88[0m - [91merror[0m[90m TS1005: [0m']' expected.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                                                                                       ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3244[0m:[93m90[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3244[0m     objectEntry<const T extends Record<string, unknown>>(object: T): [keyof T, T[keyof T]];
+[7m    [0m [91m                                                                                         ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3259[0m:[93m18[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3259[0m     arrayElement<const T>(array: ReadonlyArray<T>): T;
+[7m    [0m [91m                 ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3259[0m:[93m25[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3259[0m     arrayElement<const T>(array: ReadonlyArray<T>): T;
+[7m    [0m [91m                        ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3259[0m:[93m32[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3259[0m     arrayElement<const T>(array: ReadonlyArray<T>): T;
+[7m    [0m [91m                               ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3259[0m:[93m50[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3259[0m     arrayElement<const T>(array: ReadonlyArray<T>): T;
+[7m    [0m [91m                                                 ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3259[0m:[93m51[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3259[0m     arrayElement<const T>(array: ReadonlyArray<T>): T;
+[7m    [0m [91m                                                  ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3279[0m:[93m26[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3279[0m     weightedArrayElement<const T>(array: ReadonlyArray<{
+[7m    [0m [91m                         ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3279[0m:[93m33[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3279[0m     weightedArrayElement<const T>(array: ReadonlyArray<{
+[7m    [0m [91m                                ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3279[0m:[93m40[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3279[0m     weightedArrayElement<const T>(array: ReadonlyArray<{
+[7m    [0m [91m                                       ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3288[0m:[93m7[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3288[0m     }>): T;
+[7m    [0m [91m      ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3288[0m:[93m8[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3288[0m     }>): T;
+[7m    [0m [91m       ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3306[0m:[93m19[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3306[0m     arrayElements<const T>(array: ReadonlyArray<T>, count?: number | {
+[7m    [0m [91m                  ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3306[0m:[93m26[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3306[0m     arrayElements<const T>(array: ReadonlyArray<T>, count?: number | {
+[7m    [0m [91m                         ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3306[0m:[93m33[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3306[0m     arrayElements<const T>(array: ReadonlyArray<T>, count?: number | {
+[7m    [0m [91m                                ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3306[0m:[93m59[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3306[0m     arrayElements<const T>(array: ReadonlyArray<T>, count?: number | {
+[7m    [0m [91m                                                          ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3310[0m:[93m20[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3310[0m         min: number;
+[7m    [0m [91m                   ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3314[0m:[93m20[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3314[0m         max: number;
+[7m    [0m [91m                   ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3315[0m:[93m6[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3315[0m     }): T[];
+[7m    [0m [91m     ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3315[0m:[93m7[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3315[0m     }): T[];
+[7m    [0m [91m      ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3315[0m:[93m11[0m - [91merror[0m[90m TS1011: [0mAn element access expression should take an argument.
+
+[7m3315[0m     }): T[];
+[7m    [0m [91m          [0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3337[0m:[93m65[0m - [91merror[0m[90m TS1005: [0m'?' expected.
+
+[7m3337[0m     enumValue<T extends Record<string | number, string | number>>(enumObject: T): T[keyof T];
+[7m    [0m [91m                                                                ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3337[0m:[93m77[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3337[0m     enumValue<T extends Record<string | number, string | number>>(enumObject: T): T[keyof T];
+[7m    [0m [91m                                                                            ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3337[0m:[93m81[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3337[0m     enumValue<T extends Record<string | number, string | number>>(enumObject: T): T[keyof T];
+[7m    [0m [91m                                                                                ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3337[0m:[93m91[0m - [91merror[0m[90m TS1005: [0m']' expected.
+
+[7m3337[0m     enumValue<T extends Record<string | number, string | number>>(enumObject: T): T[keyof T];
+[7m    [0m [91m                                                                                          ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3337[0m:[93m92[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3337[0m     enumValue<T extends Record<string | number, string | number>>(enumObject: T): T[keyof T];
+[7m    [0m [91m                                                                                           ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3351[0m:[93m32[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3351[0m     rangeToNumber(numberOrRange: number | {
+[7m    [0m [91m                               ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3355[0m:[93m20[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3355[0m         min: number;
+[7m    [0m [91m                   ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3359[0m:[93m20[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3359[0m         max: number;
+[7m    [0m [91m                   ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3360[0m:[93m7[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3360[0m     }): number;
+[7m    [0m [91m      ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3378[0m:[93m14[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3378[0m     multiple<const TResult>(method: (v: unknown, index: number) => TResult, options?: {
+[7m    [0m [91m             ~~~~~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3378[0m:[93m27[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3378[0m     multiple<const TResult>(method: (v: unknown, index: number) => TResult, options?: {
+[7m    [0m [91m                          ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3378[0m:[93m35[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m3378[0m     multiple<const TResult>(method: (v: unknown, index: number) => TResult, options?: {
+[7m    [0m [91m                                  ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3378[0m:[93m85[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m3378[0m     multiple<const TResult>(method: (v: unknown, index: number) => TResult, options?: {
+[7m    [0m [91m                                                                                    ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3388[0m:[93m24[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3388[0m             min: number;
+[7m    [0m [91m                       ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3392[0m:[93m24[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3392[0m             max: number;
+[7m    [0m [91m                       ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3393[0m:[93m10[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m3393[0m         };
+[7m    [0m [91m         ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3394[0m:[93m6[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m3394[0m     }): TResult[];
+[7m    [0m [91m     ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3394[0m:[93m7[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3394[0m     }): TResult[];
+[7m    [0m [91m      ~[0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3394[0m:[93m17[0m - [91merror[0m[90m TS1011: [0mAn element access expression should take an argument.
+
+[7m3394[0m     }): TResult[];
+[7m    [0m [91m                [0m
+[96m../../node_modules/.pnpm/@faker-js+faker@10.1.0/node_modules/@faker-js/faker/dist/airline-DF6RqYmq.d.ts[0m:[93m3395[0m:[93m1[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m3395[0m }
+[7m    [0m [91m~[0m
+
+Found 113 error(s).
+
+[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m

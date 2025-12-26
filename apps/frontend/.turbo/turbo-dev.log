@@ -1,0 +1,20 @@
+
+> frontend@0.0.1 dev /home/patryk/projects/random-quiz-generator/apps/frontend
+> nuxt dev
+
+[90m[32mNuxt [1m3.19.2[22m[90m with Nitro [1m2.12.6[22m[39m                                                                                                                                      [90mnuxi[39m [90m9:48:35 PM[39m
+                                                                                                                                                                        [90m9:48:35 PM[39m
+[32m  ➜ Local:   [39m [36m[4mhttp://localhost:[1m3000[22m/[24m[39m
+[90m  ➜ Network:  use [37m--host[90m to expose[39m
+
+
+[43m[30m WARN [39m[49m We recommend adding [36mcompatibilityDate: '2025-12-16'[39m to your [36mnuxt.config[39m file.                                                                                    [90m9:48:36 PM[39m
+Using [36m2024-04-03[39m as fallback. More info at: [4mhttps://nitro.build/deploy#compatibility-date[24m
+
+[33m  ➜ DevTools: [39m[2mpress [22m[32mShift[39m[2m + [22m[32mAlt[39m[2m + [22m[32mD[39m[2m in the browser (v2.6.5)[22m                                                                                                             [90m9:48:36 PM[39m
+
+
+[90m[[90m9:48:37 PM[90m][39m [43m[30m WARN [39m[49m [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: [36mnpm i baseline-browser-mapping@latest -D[39m
+
+[32m✔[39m Vite client built in 48ms                                                                                                                                            [90m9:48:38 PM[39m
+[32m✔[39m Vite server built in 753ms                                                                                                                                           [90m9:48:38 PM[39m

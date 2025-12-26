@@ -1,20 +1,26 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "emitDecoratorMetadata": true,
-  "experimentalDecorators": true,
   "compilerOptions": {
     "strictPropertyInitialization": false,
-    "outDir": "./dist",
     "baseUrl": "./",
-    "target": "ES2021",
-    "module": "commonjs",
     "strict": true,
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "incremental": true
-  }
+    "emitDeclarationOnly": false,
+    "incremental": true,
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "skipLibCheck": true,
+
+    "target": "ES2022",
+    "module": "node16",
+    "lib": ["ES2023"],
+    "outDir": "dist",
+    "rootDir": "src",
+    "useDefineForClassFields": true,
+    "sourceMap": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

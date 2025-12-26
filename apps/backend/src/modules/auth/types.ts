@@ -1,4 +1,4 @@
-export type TokenModel = { access_token: string };
+export type TokenModel = { accessToken: string; refreshToken: string };
 
 export type JwtPayload = {
   sub: string;

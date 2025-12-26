@@ -1,18 +1,27 @@
 import "reflect-metadata";
-import { DataSource } from "typeorm";
-import * as dotenv from "dotenv";
+import { DataSource, DataSourceOptions } from "typeorm";
+import { config } from "dotenv";
+import { SeederOptions } from "typeorm-extension";
 
-dotenv.config();
+config();
 
-export const AppDataSource = new DataSource({
-    type: 'postgres',
-    host: process.env.DB_HOST,
-    port: parseInt(process.env.DB_PORT ?? '', 10),
-    username: process.env.DB_USERNAME,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    entities: ['dist/**/*.entity.{js,ts}'],
-    migrations: ['**/*-migrate.{js,ts}'],
-    synchronize: false,
-    logging: true,
-});
+const options = {
+  type: "postgres",
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT ?? "5432"),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  synchronize: false,
+  entities: ["dist/**/*.entity.{js,ts}"],
+  migrations: ["src/database/migrations/*-migrate.{js,ts}"],
+  seeds: ["dist/**/*.seed.{ts,js}"],
+  migrationsRun: false,
+  logging: true,
+};
+
+const AppDataSource = new DataSource(
+  options as DataSourceOptions & SeederOptions
+);
+
+export default AppDataSource;
