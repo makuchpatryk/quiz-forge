@@ -40,7 +40,7 @@ export class AuthController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Post("logout")
-  async logout(@Body("userId") userId: number) {
+  async logout(@Body("userId") userId: string) {
     return this.authService.logout(userId);
   }
 }

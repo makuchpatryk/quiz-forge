@@ -1,25 +1,29 @@
 import {
   BadRequestException,
   ForbiddenException,
+  Inject,
   Injectable,
   UnauthorizedException,
 } from "@nestjs/common";
-import { UserService } from "../user/user.service";
 import * as bcrypt from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
 import { TokenModel } from "./types";
 import { UserLoginDto } from "./dto/login.dto";
-import { User } from "../user/user.entity";
+import { User } from "../user/domain/user.entity";
+import { UserRepository } from "../user/domain/user.repository";
+import { USER_REPOSITORY } from "../user/domain/user.token";
 
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UserService,
+    @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
     private jwtService: JwtService
   ) {}
 
   async login(userLoginDto: UserLoginDto): Promise<TokenModel> {
-    const user = await this.userService.getUserByEmail(userLoginDto.username);
+    const user = await this.userRepository.getUserByEmail(
+      userLoginDto.username
+    );
 
     if (!user) throw new BadRequestException();
 
@@ -33,13 +37,13 @@ export class AuthService {
 
   async generateTokens(user: User): Promise<TokenModel> {
     const payload = {
-      name: user.name,
+      name: user.email,
       sub: user.id,
     };
 
     const accessToken = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_ACCESS_SECRET,
-      expiresIn: "20s",
+      expiresIn: "15m",
     });
 
     const refreshToken = await this.jwtService.signAsync(payload, {
@@ -56,11 +60,13 @@ export class AuthService {
     });
   }
 
-  async saveRefreshToken(userId: number, token: string) {
+  async saveRefreshToken(userId: string, token: string) {
     const hash = await bcrypt.hash(token, 10);
-    await this.userService.update(userId, {
-      refreshToken: hash,
-    });
+
+    const user = new User();
+    user.refreshToken = hash;
+
+    await this.userRepository.update(userId, user);
   }
 
   async refresh(refreshToken: string) {
@@ -69,7 +75,7 @@ export class AuthService {
         secret: process.env.JWT_REFRESH_SECRET,
       });
 
-      const user = await this.userService.getUserById(payload.sub);
+      const user = await this.userRepository.getUserById(payload.sub);
       if (!user || !user.refreshToken) {
         throw new ForbiddenException();
       }
@@ -89,9 +95,8 @@ export class AuthService {
     }
   }
 
-  async logout(userId: number) {
-    await this.userService.update(userId, {
-      refreshToken: void 0,
-    });
+  async logout(userId: string) {
+    const userToUpdate = new User();
+    await this.userRepository.update(userId, userToUpdate);
   }
 }

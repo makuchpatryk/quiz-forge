@@ -22,7 +22,11 @@ import { AuthModule } from "../auth/auth.module";
     ResponseController,
   ],
   imports: [
-    TypeOrmModule.forFeature([QuestionRepository, OptionRepository]),
+    TypeOrmModule.forFeature([
+      QuestionRepository,
+      OptionRepository,
+      QuizRepository,
+    ]),
     UserModule,
     AuthModule,
   ],

@@ -44,6 +44,7 @@ export class QuizController {
       limit,
       page,
     };
+
     return await this.quizService.paginate(options);
   }
   @ApiCreatedResponse({ description: "The quiz that got created", type: Quiz })

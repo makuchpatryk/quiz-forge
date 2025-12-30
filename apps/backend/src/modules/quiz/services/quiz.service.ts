@@ -14,7 +14,6 @@ import { QuizRepository } from "../repositories/quiz.repository";
 
 @Injectable()
 export class QuizService {
-  // @ts-ignore
   constructor(private quizRepository: QuizRepository) {}
 
   async getAllQuiz(): Promise<Quiz[]> {
@@ -42,12 +41,9 @@ export class QuizService {
   }
 
   async createNewQuiz(quiz: CreateQuizDto) {
-    console.log("await this.quizRepository.save(quiz)", quiz);
     return await this.quizRepository.save(quiz);
   }
 
   @OnEvent(events.RESPONSE_SUBMITTED)
-  checkQuizCompeleted(payload: ResponseAddEvent) {
-    console.log("checkQuizCompeleted", payload);
-  }
+  checkQuizCompleted(payload: ResponseAddEvent) {}
 }

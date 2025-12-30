@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import { Seeder } from "typeorm-extension";
 import { UserRoles } from "../../modules/user/enums/user.enum";
-import { User } from "../../modules/user/user.entity";
+import { User } from "../entities/user.orm-entity";
 
 export class UserCreateSeed implements Seeder {
   public async run(dataSource: DataSource): Promise<void> {
