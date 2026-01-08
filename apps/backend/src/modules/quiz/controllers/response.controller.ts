@@ -1,18 +1,27 @@
-import { Controller, Post } from '@nestjs/common';
-import { EventEmitter2 } from '@nestjs/event-emitter';
-import { ApiTags } from '@nestjs/swagger';
-import { events } from '../../../common/constants/event.constants';
-import { ResponseAddEvent } from '../events/response-add.event';
+import { Controller, Post, Sse } from "@nestjs/common";
+import { EventEmitter2 } from "@nestjs/event-emitter";
+import { ApiTags } from "@nestjs/swagger";
+import { events } from "../../../common/constants/event.constants";
+import { ResponseAddEvent } from "../events/response-add.event";
+import { fromEvent, map } from "rxjs";
 
-@Controller('/response')
-@ApiTags('Response')
+@Controller("/response")
+@ApiTags("Response")
 export class ResponseController {
   constructor(private eventEmitter: EventEmitter2) {}
 
-  @Post('')
+  @Sse("stream")
+  stream() {
+    return fromEvent(this.eventEmitter, events.RESPONSE_SUBMITTED).pipe(
+      map((data) => ({
+        data,
+      }))
+    );
+  }
+  @Post("")
   async handleQuestionResponse() {
     // insert data into the response table
-    console.log('This is inside the controller');
+    console.log("This is inside the controller");
 
     const payload = new ResponseAddEvent();
     payload.userId = 1;
@@ -20,6 +29,6 @@ export class ResponseController {
 
     this.eventEmitter.emit(events.RESPONSE_SUBMITTED, payload);
 
-    return { message: 'Response taken' };
+    return { message: "Response taken" };
   }
 }

@@ -13,6 +13,9 @@ import { UserModule } from "../user/user.module";
 import { ResponseController } from "./controllers/response.controller";
 import { ResponseService } from "./services/response.service";
 import { AuthModule } from "../auth/auth.module";
+import { Quiz } from "./entities/quiz.entity";
+import { Question } from "./entities/question.entity";
+import { Option } from "./entities/option.entity";
 
 @Module({
   controllers: [
@@ -23,6 +26,9 @@ import { AuthModule } from "../auth/auth.module";
   ],
   imports: [
     TypeOrmModule.forFeature([
+      Quiz,
+      Question,
+      Option,
       QuestionRepository,
       OptionRepository,
       QuizRepository,
@@ -36,6 +42,8 @@ import { AuthModule } from "../auth/auth.module";
     OptionService,
     ResponseService,
     QuizRepository,
+    QuestionRepository,
+    OptionRepository,
   ],
 })
 export class QuizModule {}

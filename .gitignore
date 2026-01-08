@@ -2,7 +2,8 @@ node_modules
 dist
 .idea
 .turbo/
-.nuxt
+.nuxt/
 .turbo/turbo-build.log
 .env
 turbo-build.log
+.output/

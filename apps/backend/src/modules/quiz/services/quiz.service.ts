@@ -16,15 +16,7 @@ import { QuizRepository } from "../repositories/quiz.repository";
 export class QuizService {
   constructor(private quizRepository: QuizRepository) {}
 
-  async getAllQuiz(): Promise<Quiz[]> {
-    return await this.quizRepository
-      .createQueryBuilder("q")
-      .leftJoinAndSelect("q.questions", "qt")
-      .getMany();
-  }
-
   async paginate(options: IPaginationOptions): Promise<Pagination<Quiz>> {
-    console.log("this.quizRepository", this.quizRepository);
     const qb = this.quizRepository.createQueryBuilder("q");
     qb.orderBy("q.id", "DESC");
 

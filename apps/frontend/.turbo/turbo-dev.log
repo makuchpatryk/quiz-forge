@@ -2,19 +2,29 @@
 > frontend@0.0.1 dev /home/patryk/projects/random-quiz-generator/apps/frontend
 > nuxt dev
 
-[90m[32mNuxt [1m3.19.2[22m[90m with Nitro [1m2.12.6[22m[39m                                                                                                                                      [90mnuxi[39m [90m9:48:35 PM[39m
-                                                                                                                                                                        [90m9:48:35 PM[39m
-[32m  ➜ Local:   [39m [36m[4mhttp://localhost:[1m3000[22m/[24m[39m
+[90m[32mNuxt [1m3.19.2[22m[90m with Nitro [1m2.12.6[22m[39m                                                                                                                                    [90mnuxi[39m [90m11:05:34 PM[39m
+[get-port] Unable to find an available port (tried 3000 on host "localhost"). Using alternative port 3001.                                                            [90m11:05:34 PM[39m
+                                                                                                                                                                      [90m11:05:34 PM[39m
+[32m  ➜ Local:   [39m [36m[4mhttp://localhost:[1m3001[22m/[24m[39m
 [90m  ➜ Network:  use [37m--host[90m to expose[39m
 
 
-[43m[30m WARN [39m[49m We recommend adding [36mcompatibilityDate: '2025-12-16'[39m to your [36mnuxt.config[39m file.                                                                                    [90m9:48:36 PM[39m
+[43m[30m WARN [39m[49m We recommend adding [36mcompatibilityDate: '2026-01-08'[39m to your [36mnuxt.config[39m file.                                                                                  [90m11:05:35 PM[39m
 Using [36m2024-04-03[39m as fallback. More info at: [4mhttps://nitro.build/deploy#compatibility-date[24m
 
-[33m  ➜ DevTools: [39m[2mpress [22m[32mShift[39m[2m + [22m[32mAlt[39m[2m + [22m[32mD[39m[2m in the browser (v2.6.5)[22m                                                                                                             [90m9:48:36 PM[39m
+[33m  ➜ DevTools: [39m[2mpress [22m[32mShift[39m[2m + [22m[32mAlt[39m[2m + [22m[32mD[39m[2m in the browser (v2.6.5)[22m                                                                                                           [90m11:05:35 PM[39m
 
 
-[90m[[90m9:48:37 PM[90m][39m [43m[30m WARN [39m[49m [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: [36mnpm i baseline-browser-mapping@latest -D[39m
+[41m[30m ERROR [39m[49m Cannot start nuxt:  input.replace is not a function                                                                                                           [90m11:05:36 PM[39m
 
-[32m✔[39m Vite client built in 48ms                                                                                                                                            [90m9:48:38 PM[39m
-[32m✔[39m Vite server built in 753ms                                                                                                                                           [90m9:48:38 PM[39m
+    [90mat [39mnormalizeWindowsPath ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/pathe@2.0.3/node_modules/pathe/dist/shared/pathe.M-eThtNZ.mjs:17:16[39m)
+    [90mat [39mnormalize ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/pathe@2.0.3/node_modules/pathe/dist/shared/pathe.M-eThtNZ.mjs:31:10[39m)
+    [90mat [39m_resolvePathGranularly ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxt+kit@4.2.2_magicast@0.3.5/node_modules/@nuxt/kit/dist/index.mjs:441:10[39m)
+    [90mat [39mresolvePath ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxt+kit@4.2.2_magicast@0.3.5/node_modules/@nuxt/kit/dist/index.mjs:353:21[39m)
+    [90mat [39mresolveVueI18nConfigInfo ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxtjs+i18n@10.2.1_@vue+compiler-dom@3.5.22_db0@0.3.2_eslint@9.36.0_jiti@2.6.0__ioredis@5.8._ti6yykqhhekppymszgjodnz4fi/node_modules/@nuxtjs/i18n/dist/module.mjs:276:30[39m)
+    [90mat [39mresolveLayerVueI18n ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxtjs+i18n@10.2.1_@vue+compiler-dom@3.5.22_db0@0.3.2_eslint@9.36.0_jiti@2.6.0__ioredis@5.8._ti6yykqhhekppymszgjodnz4fi/node_modules/@nuxtjs/i18n/dist/module.mjs:1333:26[39m)
+    [90mat [39mresolveLayerVueI18nConfigInfo ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxtjs+i18n@10.2.1_@vue+compiler-dom@3.5.22_db0@0.3.2_eslint@9.36.0_jiti@2.6.0__ioredis@5.8._ti6yykqhhekppymszgjodnz4fi/node_modules/@nuxtjs/i18n/dist/module.mjs:1326:20[39m)
+    [90mat [39mresolveLocaleInfo ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxtjs+i18n@10.2.1_@vue+compiler-dom@3.5.22_db0@0.3.2_eslint@9.36.0_jiti@2.6.0__ioredis@5.8._ti6yykqhhekppymszgjodnz4fi/node_modules/@nuxtjs/i18n/dist/module.mjs:1403:34[39m)
+    [90mat [39masync /home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxtjs+i18n@10.2.1_@vue+compiler-dom@3.5.22_db0@0.3.2_eslint@9.36.0_jiti@2.6.0__ioredis@5.8._ti6yykqhhekppymszgjodnz4fi/node_modules/@nuxtjs/i18n/dist/module.mjs:1838:7
+    [90mat [39masync initNuxt ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/nuxt@3.19.2_@parcel+watcher@2.5.1_@types+node@20.19.17_@vue+compiler-sfc@3.5.22_db0@0.3.2_esl_bpistyz3bir542ygwzsbmxd6mi/node_modules/nuxt/dist/index.mjs:5875:3[39m)
+
