@@ -17,6 +17,7 @@
           {{ option }}
         </div>
       </div>
+      answered: {{ answered && !isLastQuestion }}
       <button
         v-if="answered && !isLastQuestion"
         class="next-btn"
@@ -40,10 +41,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
-
 const router = useRouter();
 const { t } = useI18n();
 const questions = ref<any[]>([]);
@@ -140,12 +137,8 @@ onMounted(() => {
 
 <style scoped>
 .quiz-playing-container {
-  max-width: 600px;
   margin: 0 auto;
   padding: 32px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 .question-counter {
   font-size: 18px;
@@ -190,6 +183,7 @@ onMounted(() => {
   background: #007bff;
   color: #fff;
   cursor: pointer;
+  display: block;
 }
 .next-btn:hover,
 .restart-btn:hover,

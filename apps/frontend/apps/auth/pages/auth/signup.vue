@@ -48,7 +48,7 @@
         </button>
         <p class="auth-switch">
           {{ $t("alreadyHaveAccount") }}
-          <NuxtLink to="/login">{{ $t("loginBtn") }}</NuxtLink>
+          <NuxtLink to="/auth/login">{{ $t("loginBtn") }}</NuxtLink>
         </p>
         <div class="error-message" :class="{ success: authMessage.success }">
           {{ authMessage.text }}
@@ -59,9 +59,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 
 const router = useRouter();

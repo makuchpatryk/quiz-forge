@@ -2,29 +2,50 @@
 > frontend@0.0.1 dev /home/patryk/projects/random-quiz-generator/apps/frontend
 > nuxt dev
 
-[90m[32mNuxt [1m3.19.2[22m[90m with Nitro [1m2.12.6[22m[39m                                                                                                                                    [90mnuxi[39m [90m11:05:34 PM[39m
-[get-port] Unable to find an available port (tried 3000 on host "localhost"). Using alternative port 3001.                                                            [90m11:05:34 PM[39m
-                                                                                                                                                                      [90m11:05:34 PM[39m
-[32m  ➜ Local:   [39m [36m[4mhttp://localhost:[1m3001[22m/[24m[39m
+[90m│[39m                                                                                                                                                                      [90m11:09:29 PM[39m
+[34m●[39m  [32mNuxt [1m4.2.2[22m[39m[90m (with [39m[90mNitro [1m2.12.9[22m[39m[90m, Vite [1m7.1.7[22m[39m[90m and Vue [1m3.5.26[22m[39m[90m)[39m
+                                                                                                                                                                       [90m11:09:29 PM[39m
+[32m  ➜ Local:   [39m [36m[4mhttp://localhost:[1m3000[22m/[24m[39m
 [90m  ➜ Network:  use [37m--host[90m to expose[39m
 
+[33m  ➜ DevTools: [39m[2mpress [22m[32mShift[39m[2m + [22m[32mAlt[39m[2m + [22m[32mD[39m[2m in the browser (v3.1.1)[22m                                                                                                            [90m11:09:31 PM[39m
 
-[43m[30m WARN [39m[49m We recommend adding [36mcompatibilityDate: '2026-01-08'[39m to your [36mnuxt.config[39m file.                                                                                  [90m11:05:35 PM[39m
-Using [36m2024-04-03[39m as fallback. More info at: [4mhttps://nitro.build/deploy#compatibility-date[24m
-
-[33m  ➜ DevTools: [39m[2mpress [22m[32mShift[39m[2m + [22m[32mAlt[39m[2m + [22m[32mD[39m[2m in the browser (v2.6.5)[22m                                                                                                           [90m11:05:35 PM[39m
-
-
-[41m[30m ERROR [39m[49m Cannot start nuxt:  input.replace is not a function                                                                                                           [90m11:05:36 PM[39m
-
-    [90mat [39mnormalizeWindowsPath ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/pathe@2.0.3/node_modules/pathe/dist/shared/pathe.M-eThtNZ.mjs:17:16[39m)
-    [90mat [39mnormalize ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/pathe@2.0.3/node_modules/pathe/dist/shared/pathe.M-eThtNZ.mjs:31:10[39m)
-    [90mat [39m_resolvePathGranularly ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxt+kit@4.2.2_magicast@0.3.5/node_modules/@nuxt/kit/dist/index.mjs:441:10[39m)
-    [90mat [39mresolvePath ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxt+kit@4.2.2_magicast@0.3.5/node_modules/@nuxt/kit/dist/index.mjs:353:21[39m)
-    [90mat [39mresolveVueI18nConfigInfo ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxtjs+i18n@10.2.1_@vue+compiler-dom@3.5.22_db0@0.3.2_eslint@9.36.0_jiti@2.6.0__ioredis@5.8._ti6yykqhhekppymszgjodnz4fi/node_modules/@nuxtjs/i18n/dist/module.mjs:276:30[39m)
-    [90mat [39mresolveLayerVueI18n ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxtjs+i18n@10.2.1_@vue+compiler-dom@3.5.22_db0@0.3.2_eslint@9.36.0_jiti@2.6.0__ioredis@5.8._ti6yykqhhekppymszgjodnz4fi/node_modules/@nuxtjs/i18n/dist/module.mjs:1333:26[39m)
-    [90mat [39mresolveLayerVueI18nConfigInfo ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxtjs+i18n@10.2.1_@vue+compiler-dom@3.5.22_db0@0.3.2_eslint@9.36.0_jiti@2.6.0__ioredis@5.8._ti6yykqhhekppymszgjodnz4fi/node_modules/@nuxtjs/i18n/dist/module.mjs:1326:20[39m)
-    [90mat [39mresolveLocaleInfo ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxtjs+i18n@10.2.1_@vue+compiler-dom@3.5.22_db0@0.3.2_eslint@9.36.0_jiti@2.6.0__ioredis@5.8._ti6yykqhhekppymszgjodnz4fi/node_modules/@nuxtjs/i18n/dist/module.mjs:1403:34[39m)
-    [90mat [39masync /home/patryk/projects/random-quiz-generator/node_modules/.pnpm/@nuxtjs+i18n@10.2.1_@vue+compiler-dom@3.5.22_db0@0.3.2_eslint@9.36.0_jiti@2.6.0__ioredis@5.8._ti6yykqhhekppymszgjodnz4fi/node_modules/@nuxtjs/i18n/dist/module.mjs:1838:7
-    [90mat [39masync initNuxt ([36m/home/patryk/projects/random-quiz-generator/node_modules/.pnpm/nuxt@3.19.2_@parcel+watcher@2.5.1_@types+node@20.19.17_@vue+compiler-sfc@3.5.22_db0@0.3.2_esl_bpistyz3bir542ygwzsbmxd6mi/node_modules/nuxt/dist/index.mjs:5875:3[39m)
-
+[32m✔[39m Vite client built in 448ms                                                                                                                                          [90m11:09:36 PM[39m
+[32m✔[39m Vite server built in 433ms                                                                                                                                          [90m11:09:36 PM[39m
+[36mℹ[39m Compiled [36mplugins.server.mjs[39m in 829.61ms                                                                                                                        [90mnuxt[39m [90m11:09:39 PM[39m
+[36mℹ[39m Compiled [36mplugins.client.mjs[39m in 907.15ms                                                                                                                        [90mnuxt[39m [90m11:09:39 PM[39m
+[36mℹ[39m Compiled [36mtypes/plugins.d.ts[39m in 1887.18ms                                                                                                                       [90mnuxt[39m [90m11:09:40 PM[39m
+[36mℹ[39m Compiled [36mrouter.options.mjs[39m in 1602.46ms                                                                                                                       [90mnuxt[39m [90m11:09:43 PM[39m
+[36mℹ[39m Compiled [36mplugins.server.mjs[39m in 906.91ms                                                                                                                        [90mnuxt[39m [90m11:09:44 PM[39m
+[36mℹ[39m Compiled [36mplugins.client.mjs[39m in 976.84ms                                                                                                                        [90mnuxt[39m [90m11:09:44 PM[39m
+[36mℹ[39m Compiled [36mtypes/plugins.d.ts[39m in 998.07ms                                                                                                                        [90mnuxt[39m [90m11:09:44 PM[39m
+[32m✔[39m Nuxt Nitro server built in 8244ms                                                                                                                             [90mnitro[39m [90m11:09:46 PM[39m
+[36mℹ[39m Vite server warmed up in 3ms                                                                                                                                        [90m11:09:46 PM[39m
+[36mℹ[39m Vite client warmed up in 9ms                                                                                                                                        [90m11:09:46 PM[39m
+[36mℹ[39m Compiled [36mplugins.client.mjs[39m in 1405.89ms                                                                                                                       [90mnuxt[39m [90m11:09:46 PM[39m
+[36mℹ[39m Compiled [36mtypes/plugins.d.ts[39m in 1492.68ms                                                                                                                       [90mnuxt[39m [90m11:09:46 PM[39m
+I18N LOADED                                                                                                                                                            [90m11:09:47 PM[39m
+[32m✔[39m Vite server hmr 1 files in 15.839ms                                                                                                                                 [90m11:09:47 PM[39m
+[36mℹ[39m Compiled [36mplugins.server.mjs[39m in 1359.26ms                                                                                                                       [90mnuxt[39m [90m11:09:49 PM[39m
+[36mℹ[39m Compiled [36mplugins.client.mjs[39m in 1390.54ms                                                                                                                       [90mnuxt[39m [90m11:09:49 PM[39m
+[36mℹ[39m Compiled [36mtypes/plugins.d.ts[39m in 1397.38ms                                                                                                                       [90mnuxt[39m [90m11:09:49 PM[39m
+[43m[30m WARN [39m[49m [intlify] Not found 'ssss' key in 'pl' locale messages.                                                                                                         [90m11:09:57 PM[39m
+I18N LOADED                                                                                                                                                            [90m11:10:01 PM[39m
+[36mℹ[39m Compiled [36mplugins.server.mjs[39m in 4316.42ms                                                                                                                       [90mnuxt[39m [90m11:10:03 PM[39m
+[36mℹ[39m Compiled [36mplugins.client.mjs[39m in 4362.32ms                                                                                                                       [90mnuxt[39m [90m11:10:03 PM[39m
+[36mℹ[39m Compiled [36mtypes/plugins.d.ts[39m in 4370.38ms                                                                                                                       [90mnuxt[39m [90m11:10:03 PM[39m
+[36mℹ[39m Compiled [36mplugins.client.mjs[39m in 502.68ms                                                                                                                        [90mnuxt[39m [90m11:10:04 PM[39m
+[36mℹ[39m Compiled [36mtypes/plugins.d.ts[39m in 510.68ms                                                                                                                        [90mnuxt[39m [90m11:10:04 PM[39m
+I18N LOADED                                                                                                                                                            [90m11:11:29 PM[39m
+[32m✔[39m Vite server hmr 1 files in 0.007ms                                                                                                                                  [90m11:11:29 PM[39m
+[43m[30m WARN [39m[49m [Vue Router warn]: No match found for location with path "/auth/refresh"                                                                                        [90m11:11:29 PM[39m
+[43m[30m WARN [39m[49m [Vue Router warn]: No match found for location with path "/auth/refresh"                                                                                        [90m11:11:29 PM[39m
+I18N LOADED                                                                                                                                                            [90m11:12:54 PM[39m
+[32m✔[39m Vite server hmr 1 files in 0.004ms                                                                                                                                  [90m11:12:54 PM[39m
+[43m[30m WARN [39m[49m [Vue Router warn]: No match found for location with path "/auth/refresh"                                                                                        [90m11:12:54 PM[39m
+[43m[30m WARN [39m[49m [Vue Router warn]: No match found for location with path "/auth/refresh"                                                                                        [90m11:12:54 PM[39m
+[36mℹ[39m [32mpage reload [39m[2mapps/core/plugins/00.axios.ts[22m                                                                                                                           [90m11:13:57 PM[39m
+I18N LOADED                                                                                                                                                            [90m11:13:57 PM[39m
+[32m✔[39m Vite server hmr 5 files in 19.2ms                                                                                                                                   [90m11:13:57 PM[39m
+[43m[30m WARN [39m[49m [intlify] Not found 'ssss' key in 'pl' locale messages.                                                                                                         [90m11:13:57 PM[39m
+I18N LOADED                                                                                                                                                            [90m11:13:59 PM[39m

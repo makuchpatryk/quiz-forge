@@ -1,11 +1,12 @@
 <template>
   <div class="dashboard-container">
+    <BackToDaschboard>← {{ $t("backToDashboard") }}</BackToDaschboard>
     <h1 style="text-align: center; margin-bottom: 30px">
       {{ $t("dashboardTitle") }}
     </h1>
-    <NuxtLink class="create-quiz-btn" to="/create-quiz"
-      >+ {{ $t("createQuiz") }}</NuxtLink
-    >
+    <NuxtLink class="create-quiz-btn" to="/create-quiz">
+      + {{ $t("createQuiz") }}
+    </NuxtLink>
     <div v-if="userQuizzes.length > 0">
       <div
         v-for="quiz in userQuizzes"
@@ -44,15 +45,9 @@
       <div class="empty-state-icon">🎯</div>
       <p>{{ $t("noQuizzesYet") }}</p>
     </div>
-    <NuxtLink class="back-btn" to="/menu">← {{ $t("backToMenu") }}</NuxtLink>
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
-
-const { t } = useI18n();
 const router = useRouter();
 const currentUser = ref<string | null>(null);
 const quizzes = ref<Record<string, any>>({});
@@ -88,12 +83,8 @@ onMounted(() => {
 </script>
 <style scoped>
 .dashboard-container {
-  max-width: 700px;
   margin: 0 auto;
   padding: 32px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 .create-quiz-btn {
   display: inline-block;
@@ -163,15 +154,5 @@ onMounted(() => {
 .empty-state-icon {
   font-size: 32px;
   margin-bottom: 8px;
-}
-.back-btn {
-  display: inline-block;
-  margin-top: 24px;
-  color: #007bff;
-  text-decoration: none;
-  font-size: 16px;
-}
-.back-btn:hover {
-  text-decoration: underline;
 }
 </style>

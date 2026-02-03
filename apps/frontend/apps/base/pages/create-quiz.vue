@@ -1,5 +1,6 @@
 <template>
   <div class="create-quiz-container">
+    <back-to-daschboard />
     <h1 style="text-align: center; margin-bottom: 30px">
       {{ editingQuizId ? $t("editQuiz") : $t("createQuiz") }}
     </h1>
@@ -89,10 +90,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
-
 const router = useRouter();
 const { t } = useI18n();
 const currentUser = ref<string | null>(null);
@@ -137,6 +134,9 @@ function saveQuiz() {
   }
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
+    if (!q) {
+      return;
+    }
     if (!q.question) {
       quizMessage.value = {
         text: `⚠️ Wypełnij treść pytania ${i + 1}!`,
@@ -209,12 +209,8 @@ onMounted(() => {
 </script>
 <style scoped>
 .create-quiz-container {
-  max-width: 700px;
   margin: 0 auto;
   padding: 32px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 .form-group {
   margin-bottom: 18px;

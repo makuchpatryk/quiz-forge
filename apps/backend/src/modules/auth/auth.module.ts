@@ -13,7 +13,7 @@ import { AuthService } from "./auth.service";
       useFactory: () => {
         return {
           secret: process.env.JWT_ACCESS_SECRET,
-          signOptions: { expiresIn: "1d" },
+          signOptions: { expiresIn: "10s" },
         };
       },
     }),

@@ -40,14 +40,23 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed, onMounted } from "vue";
-import { useRouter } from "vue-router";
 const { t } = useI18n();
 
 const router = useRouter();
 const currentUser = ref<string | null>(null);
 const users = ref<Record<string, any>>({});
 const quizzes = ref<Record<string, any>>({});
+
+const fetchData = async () => {
+  try {
+    const { $api } = useNuxtApp();
+    const response = await $api.auth.login({ name: "sss", password: "ssss" });
+
+    console.log("response", response);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
 
 const userData = computed(() => {
   if (!currentUser.value || !users.value[currentUser.value]) {
@@ -64,7 +73,7 @@ const userQuizzes = computed(() => {
 
 const logout = () => {
   localStorage.removeItem("currentUser");
-  router.push("/login");
+  router.push("/auth/login");
 };
 
 onMounted(() => {
@@ -74,8 +83,10 @@ onMounted(() => {
   if (savedUser && users.value[savedUser]) {
     currentUser.value = savedUser;
   } else {
-    router.push("/login");
+    router.push("/auth/login");
   }
+
+  fetchData();
 });
 </script>
 <style scoped>

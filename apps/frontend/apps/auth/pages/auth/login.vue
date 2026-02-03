@@ -28,9 +28,10 @@
           />
         </div>
         <button class="auth-btn" @click="login">{{ $t("loginBtn") }}</button>
+        <button class="auth-btn" @click="test">{{ $t("ssss") }}</button>
         <p class="auth-switch">
           {{ $t("noAccount") }}
-          <NuxtLink to="/signup">{{ $t("registerBtn") }}</NuxtLink>
+          <NuxtLink to="/auth/signup">{{ $t("registerBtn") }}</NuxtLink>
         </p>
         <div class="error-message" :class="{ success: authMessage.success }">
           {{ authMessage.text }}
@@ -41,9 +42,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
+import { useAuthStore } from "@auth/stores/auth.ts";
+
 const { t } = useI18n();
 
 const router = useRouter();
@@ -55,25 +55,42 @@ const loadData = () => {
   users.value = JSON.parse(localStorage.getItem("quizUsers") || "{}");
 };
 
-const login = () => {
+const login = async () => {
   const { username, password } = loginForm.value;
-  if (!username || !password) {
-    authMessage.value = { text: t("fillAllFields"), success: false };
-    return;
+  // if (!username || !password) {
+  //   authMessage.value = { text: t("fillAllFields"), success: false };
+  //   return;
+  // }
+  // if (!users.value[username]) {
+  //   authMessage.value = { text: t("userNotExist"), success: false };
+  //   return;
+  // }
+  // if (users.value[username].password !== password) {
+  //   authMessage.value = { text: t("wrongPassword"), success: false };
+  //   return;
+  // }
+  // localStorage.setItem("currentUser", username);
+  // authMessage.value = { text: t("loginSuccess"), success: true };
+  // setTimeout(() => {
+  //   router.push("/");
+  // }, 500);
+
+  try {
+    const { $api } = useNuxtApp();
+    const response = await $api.auth.login({
+      username: "admin@admin.com",
+      password: "Password@123",
+    });
+    useAuthStore().setAccessToken(response.accessToken);
+    useAuthStore().setRefreshToken(response.refreshToken);
+    console.log("response", response);
+  } catch (error) {
+    console.error("Error fetching data:", error);
   }
-  if (!users.value[username]) {
-    authMessage.value = { text: t("userNotExist"), success: false };
-    return;
-  }
-  if (users.value[username].password !== password) {
-    authMessage.value = { text: t("wrongPassword"), success: false };
-    return;
-  }
-  localStorage.setItem("currentUser", username);
-  authMessage.value = { text: t("loginSuccess"), success: true };
-  setTimeout(() => {
-    router.push("/");
-  }, 500);
+};
+const test = async () => {
+  const { $api } = useNuxtApp();
+  await $api.auth.quiz({});
 };
 
 onMounted(() => {

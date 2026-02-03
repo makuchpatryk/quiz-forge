@@ -11,6 +11,7 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^2.1.0",
     "@nuxtjs/i18n": "^10.2.1",
+    "@pinia/nuxt": "^0.11.3",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",
     "vuetify": "^3.3.0"
@@ -19,10 +20,12 @@
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "@typescript-eslint/parser": "^7.16.0",
+    "axios": "^1.13.2",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "nuxt": "^4.2.2",
+    "pinia": "^3.0.4",
     "prettier": "^3.2.0",
     "typescript": "^5.4.0"
   }
