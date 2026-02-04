@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2026-01-18",
   ssr: true,
   css: ["@core/assets/main.scss"],
-  modules: ["@nuxtjs/i18n", "@pinia/nuxt"],
+  modules: ["@nuxtjs/i18n", "@pinia/nuxt", "@nuxtjs/tailwindcss"],
   i18n: {
     locales: [
       {

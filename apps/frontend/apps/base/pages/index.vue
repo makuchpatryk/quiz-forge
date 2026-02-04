@@ -1,39 +1,39 @@
 <template>
   <div>
-    <div class="user-header">
-      <div class="user-info">
-        <span class="user-icon">👤</span>
-        <span class="username">{{ currentUser }}</span>
+    <div class="flex justify-between items-center mb-6">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">👤</span>
+        <span class="font-bold text-lg">{{ currentUser }}</span>
       </div>
-      <button class="logout-btn" @click="logout">{{ $t("logout") }}</button>
+      <button class="bg-red-600 text-white border-none rounded-md px-4 py-2 cursor-pointer hover:bg-red-700" @click="logout">{{ $t("logout") }}</button>
     </div>
-    <h1 style="text-align: center; margin-bottom: 40px">
+    <h1 class="text-center mb-10 text-3xl font-bold">
       {{ $t("quizMaster") }}
     </h1>
-    <div class="menu-stats">
-      <div class="stat-card">
-        <div class="stat-icon">🏆</div>
-        <div class="stat-value">{{ userData.bestScore }}</div>
-        <div class="stat-label">{{ $t("bestScore") }}</div>
+    <div class="flex gap-6 mb-8 justify-center">
+      <div class="bg-gray-50 rounded-lg p-5 text-center min-w-[120px]">
+        <div class="text-3xl mb-2">🏆</div>
+        <div class="text-2xl font-bold">{{ userData.bestScore }}</div>
+        <div class="text-sm text-gray-600">{{ $t("bestScore") }}</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon">🎮</div>
-        <div class="stat-value">{{ userData.gamesPlayed }}</div>
-        <div class="stat-label">{{ $t("gamesPlayed") }}</div>
+      <div class="bg-gray-50 rounded-lg p-5 text-center min-w-[120px]">
+        <div class="text-3xl mb-2">🎮</div>
+        <div class="text-2xl font-bold">{{ userData.gamesPlayed }}</div>
+        <div class="text-sm text-gray-600">{{ $t("gamesPlayed") }}</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon">📝</div>
-        <div class="stat-value">{{ userQuizzes.length }}</div>
-        <div class="stat-label">{{ $t("yourQuizzes") }}</div>
+      <div class="bg-gray-50 rounded-lg p-5 text-center min-w-[120px]">
+        <div class="text-3xl mb-2">📝</div>
+        <div class="text-2xl font-bold">{{ userQuizzes.length }}</div>
+        <div class="text-sm text-gray-600">{{ $t("yourQuizzes") }}</div>
       </div>
     </div>
-    <div class="menu-buttons">
-      <NuxtLink class="menu-btn primary-btn" to="/quiz-selection">
-        <span class="btn-icon">🎯</span>
+    <div class="flex gap-6 justify-center">
+      <NuxtLink class="flex items-center gap-2 px-7 py-3 text-lg border-none rounded-lg cursor-pointer no-underline text-white bg-blue-600 transition-colors hover:bg-blue-700" to="/quiz-selection">
+        <span class="text-2xl">🎯</span>
         <span>{{ $t("playQuiz") }}</span>
       </NuxtLink>
-      <NuxtLink class="menu-btn secondary-btn" to="/dashboard">
-        <span class="btn-icon">⚙️</span>
+      <NuxtLink class="flex items-center gap-2 px-7 py-3 text-lg border-none rounded-lg cursor-pointer no-underline text-white bg-gray-600 transition-colors hover:bg-gray-700" to="/dashboard">
+        <span class="text-2xl">⚙️</span>
         <span>{{ $t("manageQuizzes") }}</span>
       </NuxtLink>
     </div>
@@ -46,17 +46,6 @@ const router = useRouter();
 const currentUser = ref<string | null>(null);
 const users = ref<Record<string, any>>({});
 const quizzes = ref<Record<string, any>>({});
-
-const fetchData = async () => {
-  try {
-    const { $api } = useNuxtApp();
-    const response = await $api.auth.login({ name: "sss", password: "ssss" });
-
-    console.log("response", response);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-};
 
 const userData = computed(() => {
   if (!currentUser.value || !users.value[currentUser.value]) {
@@ -85,91 +74,5 @@ onMounted(() => {
   } else {
     router.push("/auth/login");
   }
-
-  fetchData();
 });
 </script>
-<style scoped>
-.user-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.user-icon {
-  font-size: 22px;
-}
-.username {
-  font-weight: bold;
-  font-size: 18px;
-}
-.logout-btn {
-  background: #dc3545;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 16px;
-  cursor: pointer;
-}
-.logout-btn:hover {
-  background: #b52a37;
-}
-.menu-stats {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 32px;
-  justify-content: center;
-}
-.stat-card {
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 18px 24px;
-  text-align: center;
-  min-width: 120px;
-}
-.stat-icon {
-  font-size: 28px;
-  margin-bottom: 8px;
-}
-.stat-value {
-  font-size: 22px;
-  font-weight: bold;
-}
-.stat-label {
-  font-size: 14px;
-  color: #666;
-}
-.menu-buttons {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-}
-.menu-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 28px;
-  font-size: 18px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-decoration: none;
-  color: #fff;
-  background: #007bff;
-  transition: background 0.2s;
-}
-.menu-btn.secondary-btn {
-  background: #6c757d;
-}
-.menu-btn:hover {
-  background: #0056b3;
-}
-.btn-icon {
-  font-size: 22px;
-}
-</style>

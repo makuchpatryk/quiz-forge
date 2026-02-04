@@ -1,41 +1,33 @@
-import type { LoginDto, RefreshDto, TokenResponse } from "./types.ts";
-import type { AxiosInstance, AxiosResponse } from "axios";
+import type {
+  LoginDto,
+  RegisterDto,
+  RefreshDto,
+  TokenResponse,
+} from "./types.ts";
+import type { AxiosInstance } from "axios";
 
 export interface AuthApi {
   login: (payload: LoginDto) => Promise<TokenResponse>;
+  register: (payload: RegisterDto) => Promise<void>;
   refresh: (payload: RefreshDto) => Promise<TokenResponse>;
-  quiz: (payload: any) => Promise<any>;
 }
+
 export const createAuthApi = (axiosInstance: AxiosInstance): AuthApi => ({
   login: async (payload: LoginDto) => {
-    try {
-      const { data } = await axiosInstance.post<TokenResponse>(
-        "/auth/login",
-        payload,
-      );
-      return data;
-    } catch (e) {
-      throw e;
-    }
+    const { data } = await axiosInstance.post<TokenResponse>(
+      "/auth/login",
+      payload,
+    );
+    return data;
+  },
+  register: async (payload: RegisterDto) => {
+    await axiosInstance.post("/auth/register", payload);
   },
   refresh: async (payload: RefreshDto) => {
-    try {
-      const { data } = await axiosInstance.post<TokenResponse>(
-        "/auth/refresh",
-        payload,
-      );
-      return data;
-    } catch (e) {
-      throw e;
-    }
+    const { data } = await axiosInstance.post<TokenResponse>(
+      "/auth/refresh",
+      payload,
+    );
+    return data;
   },
-  quiz: async (payload: any) => {
-    try {
-      const { data } = await axiosInstance.get<any>("/quiz");
-      return data;
-    } catch (e) {
-      throw e;
-    }
-  },
-  // register: (payload: RegisterDto) => axiosInstance.post<RegisterResponse>('/api/auth/register', payload),
 });

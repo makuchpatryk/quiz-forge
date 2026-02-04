@@ -59,5 +59,19 @@
   "play": "Zagraj",
   "edit": "Edytuj",
   "delete": "Usuń",
-  "noQuizzesYet": "Nie masz jeszcze żadnych quizów. Stwórz swój pierwszy quiz!"
+  "noQuizzesYet": "Nie masz jeszcze żadnych quizów. Stwórz swój pierwszy quiz!",
+  "backToDashboard": "Powrót do panelu",
+  "deleteConfirm": "Czy na pewno chcesz usunąć ten quiz? Tej operacji nie można cofnąć.",
+  "minOneQuestion": "Quiz musi mieć przynajmniej jedno pytanie!",
+  "quizNameRequired": "⚠️ Podaj nazwę quizu!",
+  "quizDescriptionRequired": "⚠️ Dodaj opis quizu!",
+  "fillQuestionText": "⚠️ Wypełnij treść pytania",
+  "fillAllAnswers": "⚠️ Wypełnij wszystkie odpowiedzi w pytaniu",
+  "markCorrectAnswer": "⚠️ Zaznacz poprawną odpowiedź w pytaniu",
+  "minThreeQuestions": "⚠️ Quiz musi mieć minimum 3 pytania!",
+  "quizSavedSuccess": "✓ Quiz zapisany pomyślnie!",
+  "scorePerfect": "Perfekcyjnie! Jesteś mistrzem!",
+  "scoreGreat": "Świetna robota! Prawie perfekcyjnie!",
+  "scoreGood": "Dobry wynik! Jeszcze trochę nauki!",
+  "scoreTryAgain": "Nie poddawaj się! Spróbuj jeszcze raz!"
 }

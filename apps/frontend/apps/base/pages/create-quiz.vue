@@ -1,70 +1,71 @@
 <template>
-  <div class="create-quiz-container">
+  <div class="mx-auto p-8">
     <back-to-daschboard />
-    <h1 style="text-align: center; margin-bottom: 30px">
+    <h1 class="text-center mb-8 text-3xl font-bold">
       {{ editingQuizId ? $t("editQuiz") : $t("createQuiz") }}
     </h1>
-    <div class="form-group">
-      <label>{{ $t("quizName") }}</label>
+    <div class="mb-5">
+      <label class="block mb-2">{{ $t("quizName") }}</label>
       <input
         type="text"
         v-model="quizForm.name"
-        class="form-input"
+        class="w-full px-3 py-2 text-base border border-gray-300 rounded"
         :placeholder="$t('quizNamePlaceholder')"
       />
     </div>
-    <div class="form-group">
-      <label>{{ $t("quizDescription") }}</label>
+    <div class="mb-5">
+      <label class="block mb-2">{{ $t("quizDescription") }}</label>
       <input
         type="text"
         v-model="quizForm.description"
-        class="form-input"
+        class="w-full px-3 py-2 text-base border border-gray-300 rounded"
         :placeholder="$t('quizDescriptionPlaceholder')"
       />
     </div>
-    <h3 style="margin: 30px 0 20px 0; color: var(--dark)">
+    <h3 class="my-8 text-xl font-bold text-gray-800">
       {{ $t("questions") }}
     </h3>
     <div
       v-for="(question, qIndex) in quizForm.questions"
       :key="qIndex"
-      class="question-editor"
+      class="bg-gray-50 rounded-lg p-5 mb-5"
     >
-      <div class="question-header">
-        <span class="question-number"
+      <div class="flex justify-between items-center mb-3">
+        <span class="font-bold text-lg"
           >{{ $t("question") }} {{ qIndex + 1 }}</span
         >
-        <button class="remove-question-btn" @click="removeQuestion(qIndex)">
+        <button class="bg-red-600 text-white border-none rounded-md px-3 py-1 cursor-pointer hover:bg-red-700" @click="removeQuestion(qIndex)">
           {{ $t("remove") }}
         </button>
       </div>
-      <div class="form-group">
-        <label>{{ $t("questionText") }}</label>
+      <div class="mb-5">
+        <label class="block mb-2">{{ $t("questionText") }}</label>
         <input
           type="text"
           v-model="question.question"
-          class="form-input"
+          class="w-full px-3 py-2 text-base border border-gray-300 rounded"
           :placeholder="$t('enterQuestion')"
         />
       </div>
-      <div class="form-group">
-        <label>{{ $t("answersMarkCorrect") }}</label>
-        <div class="options-editor">
+      <div class="mb-5">
+        <label class="block mb-2">{{ $t("answersMarkCorrect") }}</label>
+        <div class="flex flex-col gap-2">
           <div
             v-for="(option, oIndex) in question.options"
             :key="oIndex"
-            class="option-editor"
+            class="flex items-center gap-2"
           >
             <input
               type="radio"
               :name="'correct-' + qIndex"
               :value="oIndex"
               v-model.number="question.correct"
+              class="cursor-pointer"
             />
             <input
               type="text"
               v-model="question.options[oIndex]"
-              class="form-input"
+              class="flex-1 px-3 py-2 text-base border border-gray-300 rounded"
               :placeholder="
                 $t('answer') + ' ' + String.fromCharCode(65 + oIndex)
               "
@@ -73,18 +74,18 @@
         </div>
       </div>
     </div>
-    <button class="add-question-btn" @click="addQuestion">
+    <button class="mt-3 px-4 py-2 text-base border-none rounded-md bg-blue-600 text-white cursor-pointer hover:bg-blue-700" @click="addQuestion">
       + {{ $t("addQuestion") }}
     </button>
-    <div class="button-group">
-      <button class="save-quiz-btn" @click="saveQuiz">
+    <div class="flex gap-5 mt-6">
+      <button class="px-5 py-2 text-base border-none rounded-md bg-green-600 text-white cursor-pointer hover:bg-green-700" @click="saveQuiz">
         💾 {{ $t("saveQuiz") }}
       </button>
-      <NuxtLink class="cancel-btn" to="/dashboard">
+      <NuxtLink class="px-5 py-2 text-base border-none rounded-md bg-red-600 text-white cursor-pointer no-underline flex items-center justify-center hover:bg-red-700" to="/dashboard">
         ❌ {{ $t("cancel") }}
       </NuxtLink>
     </div>
-    <div class="error-message" :class="{ success: quizMessage.success }">
+    <div class="mt-5 text-center" :class="quizMessage.success ? 'text-green-600' : 'text-red-600'">
       {{ quizMessage.text }}
     </div>
   </div>
@@ -116,7 +117,7 @@ function addQuestion() {
 
 function removeQuestion(index: number) {
   if (quizForm.value.questions.length <= 1) {
-    alert("Quiz musi mieć przynajmniej jedno pytanie!");
+    alert(t("minOneQuestion"));
     return;
   }
   quizForm.value.questions.splice(index, 1);
@@ -125,11 +126,11 @@ function removeQuestion(index: number) {
 function saveQuiz() {
   const { name, description, questions } = quizForm.value;
   if (!name) {
-    quizMessage.value = { text: "⚠️ Podaj nazwę quizu!", success: false };
+    quizMessage.value = { text: t("quizNameRequired"), success: false };
     return;
   }
   if (!description) {
-    quizMessage.value = { text: "⚠️ Dodaj opis quizu!", success: false };
+    quizMessage.value = { text: t("quizDescriptionRequired"), success: false };
     return;
   }
   for (let i = 0; i < questions.length; i++) {
@@ -139,21 +140,21 @@ function saveQuiz() {
     }
     if (!q.question) {
       quizMessage.value = {
-        text: `⚠️ Wypełnij treść pytania ${i + 1}!`,
+        text: `${t("fillQuestionText")} ${i + 1}!`,
         success: false,
       };
       return;
     }
     if (q.options.some((opt: string) => !opt)) {
       quizMessage.value = {
-        text: `⚠️ Wypełnij wszystkie odpowiedzi w pytaniu ${i + 1}!`,
+        text: `${t("fillAllAnswers")} ${i + 1}!`,
         success: false,
       };
       return;
     }
     if (q.correct === undefined || q.correct === null) {
       quizMessage.value = {
-        text: `⚠️ Zaznacz poprawną odpowiedź w pytaniu ${i + 1}!`,
+        text: `${t("markCorrectAnswer")} ${i + 1}!`,
         success: false,
       };
       return;
@@ -161,7 +162,7 @@ function saveQuiz() {
   }
   if (questions.length < 3) {
     quizMessage.value = {
-      text: "⚠️ Quiz musi mieć minimum 3 pytania!",
+      text: t("minThreeQuestions"),
       success: false,
     };
     return;
@@ -184,7 +185,7 @@ function saveQuiz() {
     updatedAt: new Date().toISOString(),
   };
   localStorage.setItem("quizzes", JSON.stringify(quizzes.value));
-  quizMessage.value = { text: "✓ Quiz zapisany pomyślnie!", success: true };
+  quizMessage.value = { text: t("quizSavedSuccess"), success: true };
   setTimeout(() => {
     router.push("/dashboard");
   }, 1000);
@@ -207,106 +208,3 @@ onMounted(() => {
   }
 });
 </script>
-<style scoped>
-.create-quiz-container {
-  margin: 0 auto;
-  padding: 32px;
-}
-.form-group {
-  margin-bottom: 18px;
-}
-.form-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.question-editor {
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 18px;
-  margin-bottom: 18px;
-}
-.question-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.remove-question-btn {
-  background: #dc3545;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 4px 10px;
-  cursor: pointer;
-}
-.remove-question-btn:hover {
-  background: #b52a37;
-}
-.options-editor {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.option-editor {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.add-question-btn {
-  margin-top: 10px;
-  padding: 8px 16px;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  background: #007bff;
-  color: #fff;
-  cursor: pointer;
-}
-.add-question-btn:hover {
-  background: #0056b3;
-}
-.button-group {
-  display: flex;
-  gap: 18px;
-  margin-top: 24px;
-}
-.save-quiz-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  background: #28a745;
-  color: #fff;
-  cursor: pointer;
-}
-.save-quiz-btn:hover {
-  background: #218838;
-}
-.cancel-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  background: #dc3545;
-  color: #fff;
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cancel-btn:hover {
-  background: #b52a37;
-}
-.error-message {
-  margin-top: 18px;
-  text-align: center;
-  color: red;
-}
-.success {
-  color: green;
-}
-</style>

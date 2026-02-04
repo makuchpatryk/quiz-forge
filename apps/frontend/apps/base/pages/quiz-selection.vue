@@ -1,28 +1,28 @@
 <template>
-  <div class="quiz-selection-container">
-    <h1 style="text-align: center; margin-bottom: 30px">
+  <div class="mx-auto p-8">
+    <h1 class="text-center mb-8 text-3xl font-bold">
       {{ $t("chooseQuiz") }}
     </h1>
-    <div class="quiz-list">
+    <div class="flex flex-col gap-5 mb-8">
       <div
         v-for="quiz in allQuizzes"
         :key="quiz.id"
-        class="quiz-card-item"
+        class="p-5 border border-gray-300 rounded-lg bg-gray-50 cursor-pointer transition-all hover:bg-blue-50 hover:border-blue-600"
         @click="startQuiz(quiz.id)"
       >
-        <h3>{{ quiz.name }}</h3>
-        <p>{{ quiz.description }}</p>
-        <div class="quiz-meta">
+        <h3 class="text-xl font-bold mb-2">{{ quiz.name }}</h3>
+        <p class="text-gray-700 mb-2">{{ quiz.description }}</p>
+        <div class="mt-2 text-sm text-gray-600 flex gap-4">
           <span>📝 {{ quiz.questions.length }} {{ $t("questions") }}</span>
           <span>👤 {{ quiz.author }}</span>
         </div>
       </div>
     </div>
-    <div v-if="allQuizzes.length === 0" class="empty-state">
-      <div class="empty-state-icon">📝</div>
+    <div v-if="allQuizzes.length === 0" class="text-center text-gray-500 mt-8">
+      <div class="text-4xl mb-2">📝</div>
       <p>{{ $t("noQuizzesAvailable") }}</p>
     </div>
-    <NuxtLink class="back-btn" to="/menu">← {{ $t("backToMenu") }}</NuxtLink>
+    <NuxtLink class="inline-block mt-6 text-blue-600 no-underline text-base hover:underline" to="/menu">← {{ $t("backToMenu") }}</NuxtLink>
   </div>
 </template>
 
@@ -42,56 +42,3 @@ onMounted(() => {
   quizzes.value = JSON.parse(localStorage.getItem("quizzes") || "{}");
 });
 </script>
-
-<style scoped>
-.quiz-selection-container {
-  margin: 0 auto;
-  padding: 32px;
-}
-.quiz-list {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  margin-bottom: 32px;
-}
-.quiz-card-item {
-  padding: 18px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #f9f9f9;
-  cursor: pointer;
-  transition:
-    background 0.2s,
-    border 0.2s;
-}
-.quiz-card-item:hover {
-  background: #e6f0ff;
-  border-color: #007bff;
-}
-.quiz-meta {
-  margin-top: 8px;
-  font-size: 14px;
-  color: #666;
-  display: flex;
-  gap: 16px;
-}
-.empty-state {
-  text-align: center;
-  color: #888;
-  margin-top: 32px;
-}
-.empty-state-icon {
-  font-size: 32px;
-  margin-bottom: 8px;
-}
-.back-btn {
-  display: inline-block;
-  margin-top: 24px;
-  color: #007bff;
-  text-decoration: none;
-  font-size: 16px;
-}
-.back-btn:hover {
-  text-decoration: underline;
-}
-</style>

@@ -8,19 +8,7 @@ function backToDashboard() {
 }
 </script>
 <template>
-  <NuxtLink class="back-btn" @click="backToDashboard">{{
+  <NuxtLink class="inline-block mt-6 text-blue-600 no-underline text-base hover:underline" @click="backToDashboard">{{
     $t("Back")
   }}</NuxtLink>
 </template>
-<style scoped>
-.back-btn {
-  display: inline-block;
-  margin-top: 24px;
-  color: #007bff;
-  text-decoration: none;
-  font-size: 16px;
-}
-.back-btn:hover {
-  text-decoration: underline;
-}
-</style>

@@ -1,39 +1,38 @@
 <template>
-  <div class="quiz-playing-container">
+  <div class="mx-auto p-8">
     <div v-if="!showScore">
-      <div class="question-counter">
+      <div class="text-lg mb-4">
         {{ $t("question") }} {{ currentQuestionIndex + 1 }} {{ $t("of") }}
         {{ questions.length }}
       </div>
-      <h1 class="question">{{ currentQuestion.question }}</h1>
-      <div class="options">
+      <h1 class="text-2xl mb-6 font-bold">{{ currentQuestion.question }}</h1>
+      <div class="flex flex-col gap-3 mb-6">
         <div
           v-for="(option, index) in currentQuestion.options"
           :key="index"
-          class="option"
+          class="p-3 border border-gray-300 rounded-md cursor-pointer bg-gray-50 transition-all"
           :class="getOptionClass(index)"
           @click="selectOption(index)"
         >
           {{ option }}
         </div>
       </div>
-      answered: {{ answered && !isLastQuestion }}
       <button
         v-if="answered && !isLastQuestion"
-        class="next-btn"
+        class="mt-4 px-5 py-2 text-base border-none rounded-md bg-blue-600 text-white cursor-pointer block hover:bg-blue-700"
         @click="nextQuestion"
       >
         {{ $t("nextQuestion") }}
       </button>
     </div>
-    <div v-else class="score-container">
-      <h1>🎉 {{ $t("congrats") }}</h1>
-      <div class="score-value">{{ quizScore }}/{{ questions.length }}</div>
-      <p class="score-message">{{ scoreMessage }}</p>
-      <button class="restart-btn" @click="restartQuiz">
+    <div v-else class="text-center">
+      <h1 class="text-3xl font-bold mb-4">🎉 {{ $t("congrats") }}</h1>
+      <div class="text-4xl my-4">{{ quizScore }}/{{ questions.length }}</div>
+      <p class="text-xl mb-6">{{ scoreMessage }}</p>
+      <button class="mt-4 px-5 py-2 text-base border-none rounded-md bg-blue-600 text-white cursor-pointer block mx-auto hover:bg-blue-700" @click="restartQuiz">
         {{ $t("playAgain") }}
       </button>
-      <NuxtLink class="menu-return-btn" to="/menu">
+      <NuxtLink class="mt-4 px-5 py-2 text-base border-none rounded-md bg-blue-600 text-white cursor-pointer block mx-auto no-underline hover:bg-blue-700" to="/menu">
         {{ $t("backToMenu") }}
       </NuxtLink>
     </div>
@@ -64,10 +63,10 @@ const scoreMessage = computed(() => {
   const percentage = Math.round(
     (quizScore.value / questions.value.length) * 100,
   );
-  if (percentage === 100) return "Perfekcyjnie! Jesteś mistrzem!";
-  if (percentage >= 75) return "Świetna robota! Prawie perfekcyjnie!";
-  if (percentage >= 50) return "Dobry wynik! Jeszcze trochę nauki!";
-  return "Nie poddawaj się! Spróbuj jeszcze raz!";
+  if (percentage === 100) return t("scorePerfect");
+  if (percentage >= 75) return t("scoreGreat");
+  if (percentage >= 50) return t("scoreGood");
+  return t("scoreTryAgain");
 });
 
 const selectOption = (index: number) => {
@@ -89,10 +88,10 @@ const selectOption = (index: number) => {
 const getOptionClass = (index: number) => {
   if (!answered.value) return "";
   if (index === selectedOption.value) {
-    return index === currentQuestion.value.correct ? "correct" : "wrong";
+    return index === currentQuestion.value.correct ? "!bg-green-200 !border-green-600" : "!bg-red-200 !border-red-600";
   }
   if (index === currentQuestion.value.correct) {
-    return "correct";
+    return "!bg-green-200 !border-green-600";
   }
   return "";
 };
@@ -134,71 +133,3 @@ onMounted(() => {
   }
 });
 </script>
-
-<style scoped>
-.quiz-playing-container {
-  margin: 0 auto;
-  padding: 32px;
-}
-.question-counter {
-  font-size: 18px;
-  margin-bottom: 16px;
-}
-.question {
-  font-size: 24px;
-  margin-bottom: 24px;
-}
-.options {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-.option {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  cursor: pointer;
-  background: #f9f9f9;
-  transition:
-    background 0.2s,
-    border 0.2s;
-}
-.option.correct {
-  background: #d4edda;
-  border-color: #28a745;
-}
-.option.wrong {
-  background: #f8d7da;
-  border-color: #dc3545;
-}
-.next-btn,
-.restart-btn,
-.menu-return-btn {
-  margin-top: 16px;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  background: #007bff;
-  color: #fff;
-  cursor: pointer;
-  display: block;
-}
-.next-btn:hover,
-.restart-btn:hover,
-.menu-return-btn:hover {
-  background: #0056b3;
-}
-.score-container {
-  text-align: center;
-}
-.score-value {
-  font-size: 32px;
-  margin: 16px 0;
-}
-.score-message {
-  font-size: 20px;
-  margin-bottom: 24px;
-}
-</style>
