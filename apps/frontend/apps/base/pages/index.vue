@@ -5,7 +5,12 @@
         <span class="text-2xl">👤</span>
         <span class="font-bold text-lg">{{ currentUser }}</span>
       </div>
-      <button class="bg-red-600 text-white border-none rounded-md px-4 py-2 cursor-pointer hover:bg-red-700" @click="logout">{{ $t("logout") }}</button>
+      <button
+        class="bg-red-600 text-white border-none rounded-md px-4 py-2 cursor-pointer hover:bg-red-700"
+        @click="logout"
+      >
+        {{ $t("logout") }}
+      </button>
     </div>
     <h1 class="text-center mb-10 text-3xl font-bold">
       {{ $t("quizMaster") }}
@@ -28,11 +33,17 @@
       </div>
     </div>
     <div class="flex gap-6 justify-center">
-      <NuxtLink class="flex items-center gap-2 px-7 py-3 text-lg border-none rounded-lg cursor-pointer no-underline text-white bg-blue-600 transition-colors hover:bg-blue-700" to="/quiz-selection">
+      <NuxtLink
+        class="flex items-center gap-2 px-7 py-3 text-lg border-none rounded-lg cursor-pointer no-underline text-white bg-blue-600 transition-colors hover:bg-blue-700"
+        to="/quiz-selection"
+      >
         <span class="text-2xl">🎯</span>
         <span>{{ $t("playQuiz") }}</span>
       </NuxtLink>
-      <NuxtLink class="flex items-center gap-2 px-7 py-3 text-lg border-none rounded-lg cursor-pointer no-underline text-white bg-gray-600 transition-colors hover:bg-gray-700" to="/dashboard">
+      <NuxtLink
+        class="flex items-center gap-2 px-7 py-3 text-lg border-none rounded-lg cursor-pointer no-underline text-white bg-gray-600 transition-colors hover:bg-gray-700"
+        to="/dashboard"
+      >
         <span class="text-2xl">⚙️</span>
         <span>{{ $t("manageQuizzes") }}</span>
       </NuxtLink>
@@ -40,6 +51,8 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { useAuthStore } from "@auth/stores/auth.ts";
+
 const { t } = useI18n();
 
 const router = useRouter();
@@ -68,11 +81,6 @@ const logout = () => {
 onMounted(() => {
   users.value = JSON.parse(localStorage.getItem("quizUsers") || "{}");
   quizzes.value = JSON.parse(localStorage.getItem("quizzes") || "{}");
-  const savedUser = localStorage.getItem("currentUser");
-  if (savedUser && users.value[savedUser]) {
-    currentUser.value = savedUser;
-  } else {
-    router.push("/auth/login");
-  }
+  if (!useAuthStore().state.accessToken) router.push("/auth/login");
 });
 </script>

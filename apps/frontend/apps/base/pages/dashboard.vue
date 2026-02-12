@@ -4,7 +4,10 @@
     <h1 class="text-center mb-8 text-3xl font-bold">
       {{ $t("dashboardTitle") }}
     </h1>
-    <NuxtLink class="inline-block mb-6 px-5 py-2 text-base bg-blue-600 text-white border-none rounded-md no-underline cursor-pointer hover:bg-blue-700" to="/create-quiz">
+    <NuxtLink
+      class="inline-block mb-6 px-5 py-2 text-base bg-blue-600 text-white border-none rounded-md no-underline cursor-pointer hover:bg-blue-700"
+      to="/create-quiz"
+    >
       + {{ $t("createQuiz") }}
     </NuxtLink>
     <div v-if="userQuizzes.length > 0">
@@ -48,6 +51,8 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { useAuthStore } from "@auth/stores/auth.ts";
+
 const router = useRouter();
 const currentUser = ref<string | null>(null);
 const quizzes = ref<Record<string, any>>({});
@@ -74,8 +79,6 @@ function formatDate(dateString: string) {
 
 onMounted(() => {
   quizzes.value = JSON.parse(localStorage.getItem("quizzes") || "{}");
-  const savedUser = localStorage.getItem("currentUser");
-  if (savedUser) currentUser.value = savedUser;
-  else router.push("/login");
+  if (!useAuthStore().state.accessToken) router.push("/auth/login");
 });
 </script>

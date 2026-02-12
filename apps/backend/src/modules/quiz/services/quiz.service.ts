@@ -11,6 +11,7 @@ import { CreateQuizDto } from "../dto/create-quiz.dto";
 import { Quiz } from "../entities/quiz.entity";
 import { ResponseAddEvent } from "../events/response-add.event";
 import { QuizRepository } from "../repositories/quiz.repository";
+import { In } from "typeorm";
 
 @Injectable()
 export class QuizService {
@@ -19,11 +20,23 @@ export class QuizService {
   async paginate(options: IPaginationOptions): Promise<Pagination<Quiz>> {
     const qb = this.quizRepository
       .createQueryBuilder("q")
-      .leftJoinAndSelect("q.questions", "question")
-      .leftJoinAndSelect("question.options", "option");
-    qb.orderBy("q.id", "DESC");
+      .orderBy("q.id", "DESC");
 
-    return paginate<Quiz>(qb, options);
+    const result = await paginate<Quiz>(qb, options);
+
+    const quizzes = await this.quizRepository.find({
+      where: { id: In(result.items.map((q) => q.id)) },
+      relations: {
+        questions: {
+          options: true,
+        },
+      },
+    });
+
+    return {
+      ...result,
+      items: quizzes,
+    };
   }
 
   async getQuizById(id: number): Promise<Quiz> {
