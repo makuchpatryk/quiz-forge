@@ -92,7 +92,7 @@ async function login() {
     };
 
     setTimeout(function () {
-      router.push("/quiz");
+      router.push("/");
     }, 1000);
   } catch (error: AxiosError<any> | any) {
     console.error("Error during login:", error);

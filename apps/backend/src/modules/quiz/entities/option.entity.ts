@@ -1,31 +1,33 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 import {
   BaseEntity,
   Column,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Question } from './question.entity';
+} from "typeorm";
+import { Question } from "./question.entity";
 
-@Entity('options')
+@Entity("options")
 export class Option extends BaseEntity {
-  @ApiProperty({ description: 'Primary key as Option ID', example: 1 })
+  @ApiProperty({ description: "Primary key as Option ID", example: 1 })
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty({ description: 'The actual option', example: 'Owl' })
+  @ApiProperty({ description: "The actual option", example: "Owl" })
   @Column({
-    type: 'varchar',
+    type: "varchar",
   })
   text: string;
 
-  @ApiProperty({ description: 'Whether option is correct', example: true })
+  @ApiProperty({ description: "Whether option is correct", example: true })
   @Column({
-    type: 'boolean',
+    type: "boolean",
   })
   isCorrect: boolean;
 
-  @ManyToOne(() => Question, (question) => question.options)
+  @ManyToOne(() => Question, (question) => question.options, {
+    onDelete: "CASCADE",
+  })
   question: Question;
 }

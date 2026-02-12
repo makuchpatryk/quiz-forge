@@ -17,22 +17,26 @@ export class QuizService {
   constructor(private quizRepository: QuizRepository) {}
 
   async paginate(options: IPaginationOptions): Promise<Pagination<Quiz>> {
-    const qb = this.quizRepository.createQueryBuilder("q");
+    const qb = this.quizRepository
+      .createQueryBuilder("q")
+      .leftJoinAndSelect("q.questions", "question")
+      .leftJoinAndSelect("question.options", "option");
     qb.orderBy("q.id", "DESC");
 
     return paginate<Quiz>(qb, options);
   }
 
   async getQuizById(id: number): Promise<Quiz> {
-    return (await this.quizRepository.findOne({
+    return await this.quizRepository.findOne({
       where: {
         id,
       },
       relations: ["questions", "questions.options"],
-    })) as Quiz;
+    });
   }
 
-  async createNewQuiz(quiz: CreateQuizDto) {
+  async createNewQuiz(dto: CreateQuizDto) {
+    const quiz = this.quizRepository.create(dto);
     return await this.quizRepository.save(quiz);
   }
 
