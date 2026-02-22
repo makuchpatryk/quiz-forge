@@ -51,8 +51,12 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from "@auth/stores/auth.ts";
 import type { AxiosError } from "axios";
+import { useAuthService } from "@auth/composables/auth";
+
+definePageMeta({
+  layout: "auth",
+});
 
 const { t } = useI18n();
 const { $api } = useNuxtApp();
@@ -60,11 +64,7 @@ const { $api } = useNuxtApp();
 const router = useRouter();
 const loginForm = ref({ username: "", password: "" });
 const authMessage = ref({ text: "", success: false });
-const users = ref<Record<string, any>>({});
-
-function loadData() {
-  users.value = JSON.parse(localStorage.getItem("quizUsers") || "{}");
-}
+const authService = useAuthService();
 
 async function login() {
   const { username, password } = loginForm.value;
@@ -78,13 +78,13 @@ async function login() {
   }
 
   try {
-    const response = await $api.auth.login({
+    await $api.auth.login({
       username: username,
       password: password,
     });
 
-    useAuthStore().setAccessToken(response.accessToken);
-    useAuthStore().setRefreshToken(response.refreshToken);
+    // Po zalogowaniu pobierz dane użytkownika
+    await authService.checkAuth();
 
     authMessage.value = {
       text: t("loginSuccess"),
@@ -102,8 +102,4 @@ async function login() {
     };
   }
 }
-
-onMounted(() => {
-  loadData();
-});
 </script>

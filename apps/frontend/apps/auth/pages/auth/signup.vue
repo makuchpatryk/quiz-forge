@@ -43,14 +43,22 @@
             @keyup.enter="register"
           />
         </div>
-        <button class="w-full px-3 py-2 text-lg text-white bg-blue-600 border-none rounded cursor-pointer hover:bg-blue-700" @click="register">
+        <button
+          class="w-full px-3 py-2 text-lg text-white bg-blue-600 border-none rounded cursor-pointer hover:bg-blue-700"
+          @click="register"
+        >
           {{ $t("registerBtn") }}
         </button>
         <p class="mt-2 text-center">
           {{ $t("alreadyHaveAccount") }}
-          <NuxtLink to="/auth/login" class="text-blue-600 hover:underline">{{ $t("loginBtn") }}</NuxtLink>
+          <NuxtLink to="/auth/login" class="text-blue-600 hover:underline">{{
+            $t("loginBtn")
+          }}</NuxtLink>
         </p>
-        <div class="mt-2 text-center" :class="authMessage.success ? 'text-green-600' : 'text-red-600'">
+        <div
+          class="mt-2 text-center"
+          :class="authMessage.success ? 'text-green-600' : 'text-red-600'"
+        >
           {{ authMessage.text }}
         </div>
       </div>
@@ -60,6 +68,10 @@
 
 <script setup lang="ts">
 import type { AxiosError } from "axios";
+
+definePageMeta({
+  layout: "auth",
+});
 
 const { t } = useI18n();
 const { $api } = useNuxtApp();

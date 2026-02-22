@@ -9,11 +9,14 @@ export interface RegisterDto {
   password: string;
 }
 
-export interface RefreshDto {
-  refreshToken: string;
+export interface AuthMessageResponse {
+  message: string;
 }
 
-export interface TokenResponse {
-  accessToken: string;
-  refreshToken: string;
+export interface UserResponse {
+  role: string;
+  id: string;
+  email: string;
+  updatedAt: string;
+  createdAt: string;
 }

@@ -37,8 +37,8 @@ export class AuthService {
 
   async generateTokens(user: User): Promise<TokenModel> {
     const payload = {
-      name: user.email,
       sub: user.id,
+      name: user.email,
     };
 
     const accessToken = await this.jwtService.signAsync(payload, {

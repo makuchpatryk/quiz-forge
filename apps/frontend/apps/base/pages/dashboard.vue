@@ -51,8 +51,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useAuthStore } from "@auth/stores/auth.ts";
-
 const router = useRouter();
 const currentUser = ref<string | null>(null);
 const quizzes = ref<Record<string, any>>({});
@@ -79,6 +77,5 @@ function formatDate(dateString: string) {
 
 onMounted(() => {
   quizzes.value = JSON.parse(localStorage.getItem("quizzes") || "{}");
-  if (!useAuthStore().state.accessToken) router.push("/auth/login");
 });
 </script>

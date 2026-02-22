@@ -1,33 +1,50 @@
 import type {
   LoginDto,
   RegisterDto,
-  RefreshDto,
-  TokenResponse,
+  UserResponse,
+  AuthMessageResponse,
 } from "./types.ts";
 import type { AxiosInstance } from "axios";
 
 export interface AuthApi {
-  login: (payload: LoginDto) => Promise<TokenResponse>;
+  login: (payload: LoginDto) => Promise<AuthMessageResponse>;
   register: (payload: RegisterDto) => Promise<void>;
-  refresh: (payload: RefreshDto) => Promise<TokenResponse>;
+  refresh: () => Promise<AuthMessageResponse>;
+  logout: () => Promise<AuthMessageResponse>;
+  getMe: () => Promise<UserResponse>;
 }
 
 export const createAuthApi = (axiosInstance: AxiosInstance): AuthApi => ({
   login: async (payload: LoginDto) => {
-    const { data } = await axiosInstance.post<TokenResponse>(
-      "/auth/login",
-      payload,
-    );
-    return data;
+    // Używamy $fetch z wewnętrznym Nuxt API dla SSR
+    return await $fetch<AuthMessageResponse>("/api/auth/login", {
+      method: "POST",
+      body: payload,
+      credentials: "include",
+    });
   },
   register: async (payload: RegisterDto) => {
-    await axiosInstance.post("/auth/register", payload);
+    await $fetch("/api/auth/register", {
+      method: "POST",
+      body: payload,
+      credentials: "include",
+    });
   },
-  refresh: async (payload: RefreshDto) => {
-    const { data } = await axiosInstance.post<TokenResponse>(
-      "/auth/refresh",
-      payload,
-    );
-    return data;
+  refresh: async () => {
+    return await $fetch<AuthMessageResponse>("/api/auth/refresh", {
+      method: "POST",
+      credentials: "include",
+    });
+  },
+  logout: async () => {
+    return await $fetch<AuthMessageResponse>("/api/auth/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+  },
+  getMe: async () => {
+    return await $fetch<UserResponse>("/api/auth/me", {
+      credentials: "include",
+    });
   },
 });

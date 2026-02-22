@@ -3,7 +3,7 @@ import { User as OrmUser } from "../entities/user.orm-entity";
 
 export class UserMapper {
   static toDomain(orm: OrmUser): UserDomain {
-    const user = {
+    return {
       role: orm.role,
       id: orm.id,
       refreshToken: orm.refreshToken,
@@ -12,7 +12,6 @@ export class UserMapper {
       createdAt: orm.createdAt,
       password: orm.password,
     } as UserDomain;
-    return user;
   }
 
   static toOrm(user: UserDomain): OrmUser {

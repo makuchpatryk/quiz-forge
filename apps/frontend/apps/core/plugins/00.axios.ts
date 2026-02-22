@@ -3,11 +3,9 @@ import axios, {
   type AxiosInstance,
   type InternalAxiosRequestConfig,
 } from "axios";
-import { useAuthStore } from "@auth/stores/auth.ts";
-import { createAuthApi } from "@core/libs/api/auth";
 
 interface QueueItem {
-  resolve: (token: string) => void;
+  resolve: () => void;
   reject: (error: unknown) => void;
 }
 
@@ -21,57 +19,46 @@ function createTokenRefreshHandler(axiosInstance: AxiosInstance) {
   let isRefreshing = false;
   let failedQueue: QueueItem[] = [];
 
-  const processQueue = (error: unknown, token: string | null = null): void => {
+  const processQueue = (error: unknown): void => {
     failedQueue.forEach((item) => {
       if (error) {
         item.reject(error);
-      } else if (token) {
-        item.resolve(token);
+      } else {
+        item.resolve();
       }
     });
     failedQueue = [];
   };
 
-  const setAuthHeader = (
-    config: InternalAxiosRequestConfig,
-    token: string,
-  ): void => {
-    config.headers.Authorization = `Bearer ${token}`;
-  };
-
   const queueFailedRequest = async (
     originalRequest: RetryableRequestConfig,
   ): Promise<unknown> => {
-    const token = await new Promise<string>((resolve, reject) => {
+    await new Promise<void>((resolve, reject) => {
       failedQueue.push({ resolve, reject });
     });
-    setAuthHeader(originalRequest, token);
     return await axiosInstance(originalRequest);
   };
 
   const attemptTokenRefresh = async (
     originalRequest: RetryableRequestConfig,
-    authStore: ReturnType<typeof useAuthStore>,
   ): Promise<unknown> => {
     originalRequest._retry = true;
     isRefreshing = true;
 
     try {
-      const authApi = createAuthApi(axiosInstance);
-      const data = await authApi.refresh({
-        refreshToken: authStore.state.refreshToken!,
+      // Refresh przez wewnętrzne API Nuxt dla SSR compatibility
+      await $fetch("/api/auth/refresh", {
+        method: "POST",
+        credentials: "include",
       });
-
-      authStore.setAccessToken(data.accessToken);
-      authStore.setRefreshToken(data.refreshToken);
-
-      processQueue(null, data.accessToken);
-      setAuthHeader(originalRequest, data.accessToken);
-
+      processQueue(null);
       return axiosInstance(originalRequest);
     } catch (err) {
-      processQueue(err, null);
-      authStore.logout();
+      processQueue(err);
+      // Przekieruj do logowania przy błędzie refresh
+      if (import.meta.client) {
+        window.location.href = "/auth/login";
+      }
       throw err;
     } finally {
       isRefreshing = false;
@@ -92,18 +79,11 @@ function createTokenRefreshHandler(axiosInstance: AxiosInstance) {
       return Promise.reject(error);
     }
 
-    const authStore = useAuthStore();
-
-    if (!authStore.state.refreshToken) {
-      authStore.logout();
-      return Promise.reject(error);
-    }
-
     if (isRefreshing) {
       return queueFailedRequest(originalRequest);
     }
 
-    return attemptTokenRefresh(originalRequest, authStore);
+    return attemptTokenRefresh(originalRequest);
   };
 }
 
@@ -112,14 +92,7 @@ export default defineNuxtPlugin(() => {
 
   const axiosInstance = axios.create({
     baseURL: runtimeConfig.public.apiBaseUrl,
-  });
-
-  axiosInstance.interceptors.request.use((config) => {
-    const token = useAuthStore().state.accessToken;
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
+    withCredentials: true, // Wysyłaj cookies z każdym requestem
   });
 
   axiosInstance.interceptors.response.use(

@@ -2,45 +2,113 @@ import {
   Body,
   Controller,
   Get,
+  Inject,
   Post,
   Request,
+  Res,
   UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { Response } from "express";
 import { AuthService } from "./auth.service";
 import { UserLoginDto } from "./dto/login.dto";
-import { TokenModel } from "./types";
 import { AuthGuard } from "./auth.guard";
 import { RequestAuth } from "../../common/types";
-import { AuthRefreshDto } from "./dto/refresh.dto";
+import { USER_REPOSITORY } from "../user/domain/user.token";
+import { UserRepository } from "../user/domain/user.repository";
+
+const COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "strict" as const,
+};
+
+const ACCESS_TOKEN_MAX_AGE = 60 * 60 * 1000; // 1 hour
+const REFRESH_TOKEN_MAX_AGE = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 @ApiTags("Auth")
 @Controller("auth")
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    @Inject(USER_REPOSITORY)
+    private readonly userRepository: UserRepository
+  ) {}
 
   @Post("login")
-  async login(@Body() userLoginDto: UserLoginDto): Promise<TokenModel> {
-    return this.authService.login(userLoginDto);
+  async login(
+    @Body() userLoginDto: UserLoginDto,
+    @Res({ passthrough: true }) res: Response
+  ) {
+    const tokens = await this.authService.login(userLoginDto);
+
+    res.cookie("accessToken", tokens.accessToken, {
+      ...COOKIE_OPTIONS,
+      maxAge: ACCESS_TOKEN_MAX_AGE,
+    });
+
+    res.cookie("refreshToken", tokens.refreshToken, {
+      ...COOKIE_OPTIONS,
+      maxAge: REFRESH_TOKEN_MAX_AGE,
+      path: "/auth",
+    });
+
+    return { message: "Login successful" };
   }
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
-  @Get("user")
-  async user(@Request() req: RequestAuth): Promise<any> {
-    return req.user;
+  @Get("me")
+  async me(@Request() req: RequestAuth) {
+    const { password, ...rest } = await this.userRepository.getUserById(
+      req.user.id
+    );
+    return rest;
   }
 
   @ApiBearerAuth()
   @Post("refresh")
-  async refresh(@Body() authRefreshDto: AuthRefreshDto) {
-    return this.authService.refresh(authRefreshDto.refreshToken);
+  async refresh(
+    @Request() req: RequestAuth,
+    @Res({ passthrough: true }) res: Response
+  ) {
+    const refreshToken = req.cookies?.refreshToken;
+    if (!refreshToken) {
+      res.status(401);
+      return { message: "No refresh token provided" };
+    }
+
+    const tokens = await this.authService.refresh(refreshToken);
+
+    res.cookie("accessToken", tokens.accessToken, {
+      ...COOKIE_OPTIONS,
+      maxAge: ACCESS_TOKEN_MAX_AGE,
+    });
+
+    res.cookie("refreshToken", tokens.refreshToken, {
+      ...COOKIE_OPTIONS,
+      maxAge: REFRESH_TOKEN_MAX_AGE,
+      path: "/auth",
+    });
+
+    return { message: "Tokens refreshed" };
   }
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Post("logout")
-  async logout(@Body("userId") userId: string) {
-    return this.authService.logout(userId);
+  async logout(
+    @Request() req: RequestAuth,
+    @Res({ passthrough: true }) res: Response
+  ) {
+    await this.authService.logout(req.user.id);
+
+    res.clearCookie("accessToken", COOKIE_OPTIONS);
+    res.clearCookie("refreshToken", {
+      ...COOKIE_OPTIONS,
+      path: "/auth",
+    });
+
+    return { message: "Logged out successfully" };
   }
 }

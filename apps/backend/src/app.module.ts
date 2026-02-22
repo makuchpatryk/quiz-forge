@@ -12,6 +12,7 @@ import { UserModule } from "./modules/user/user.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { ApiTokenCheckMiddleware } from "./common/middleware/api-token-check.middleware";
 import { EventEmitterModule } from "@nestjs/event-emitter";
+import { AppController } from "./app.controller";
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { EventEmitterModule } from "@nestjs/event-emitter";
     UserModule,
     AuthModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule implements NestModule {

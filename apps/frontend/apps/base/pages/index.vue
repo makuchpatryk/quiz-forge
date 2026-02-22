@@ -51,8 +51,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useAuthStore } from "@auth/stores/auth.ts";
-
 const { t } = useI18n();
 
 const router = useRouter();
@@ -81,6 +79,5 @@ const logout = () => {
 onMounted(() => {
   users.value = JSON.parse(localStorage.getItem("quizUsers") || "{}");
   quizzes.value = JSON.parse(localStorage.getItem("quizzes") || "{}");
-  if (!useAuthStore().state.accessToken) router.push("/auth/login");
 });
 </script>

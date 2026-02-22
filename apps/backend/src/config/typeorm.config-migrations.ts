@@ -13,9 +13,9 @@ const options = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   synchronize: false,
-  entities: ["dist/**/*.entity.{js,ts}"],
+  entities: ["src/database/entities/*.orm-entity.{js,ts}"],
   migrations: ["src/database/migrations/*-migrate.{js,ts}"],
-  seeds: ["dist/**/*.seed.{ts,js}"],
+  seeds: ["src/database/seeds/*.seed.{ts,js}"],
   migrationsRun: false,
   logging: true,
 };

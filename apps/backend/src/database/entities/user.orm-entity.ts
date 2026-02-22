@@ -11,8 +11,8 @@ import { UserRoles } from "./user.enum";
 
 @Entity({ name: "users" })
 export class User extends BaseEntity {
-  @ApiProperty({ description: "Primary key as User ID", example: 1 })
-  @PrimaryGeneratedColumn()
+  @ApiProperty({ description: "Primary key as User ID", example: "xxxx" })
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @ApiProperty({ description: "User name", example: "Jhon Doe" })
