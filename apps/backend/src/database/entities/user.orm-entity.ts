@@ -13,11 +13,11 @@ import { UserRoles } from "./user.enum";
 export class User extends BaseEntity {
   @ApiProperty({ description: "Primary key as User ID", example: "xxxx" })
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  id!: string;
 
   @ApiProperty({ description: "User name", example: "Jhon Doe" })
   @Column()
-  name: string;
+  name!: string;
 
   @ApiProperty({
     description: "User email address",
@@ -26,25 +26,25 @@ export class User extends BaseEntity {
   @Column({
     unique: true,
   })
-  email: string;
+  email!: string;
 
   @ApiProperty({ description: "Hashed user password" })
   @Column()
-  password: string;
+  password!: string;
 
   @Column({ type: "enum", enum: UserRoles, default: UserRoles.MEMBER })
-  role: UserRoles;
+  role!: UserRoles;
 
   @ApiProperty({ description: "When user was created" })
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @ApiProperty({ description: "When user was updated" })
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt!: Date;
 
   @Column({
     nullable: true,
   })
-  refreshToken: string;
+  refreshToken!: string | null;
 }
