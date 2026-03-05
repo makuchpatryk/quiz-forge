@@ -73,5 +73,11 @@
   "scorePerfect": "Perfekcyjnie! Jesteś mistrzem!",
   "scoreGreat": "Świetna robota! Prawie perfekcyjnie!",
   "scoreGood": "Dobry wynik! Jeszcze trochę nauki!",
-  "scoreTryAgain": "Nie poddawaj się! Spróbuj jeszcze raz!"
+  "scoreTryAgain": "Nie poddawaj się! Spróbuj jeszcze raz!",
+  "loadingQuizzes": "Ładowanie quizów...",
+  "loadQuizzesError": "⚠️ Nie udało się załadować quizów. Spróbuj ponownie później.",
+  "editNotAvailable": "Edycja będzie wkrótce dostępna",
+  "deleteNotAvailable": "Usuwanie będzie wkrótce dostępne",
+  "showPassword": "Pokaż hasło",
+  "hidePassword": "Ukryj hasło"
 }

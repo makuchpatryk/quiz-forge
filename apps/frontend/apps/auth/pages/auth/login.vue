@@ -19,13 +19,23 @@
         </div>
         <div class="mb-4">
           <label class="block mb-2">{{ $t("password") }}</label>
-          <input
-            type="password"
-            v-model="loginForm.password"
-            class="w-full px-3 py-2 text-base border border-gray-300 rounded"
-            :placeholder="$t('enterPassword')"
-            @keyup.enter="login"
-          />
+          <div class="relative">
+            <input
+              :type="showPassword ? 'text' : 'password'"
+              v-model="loginForm.password"
+              class="w-full px-3 py-2 pr-10 text-base border border-gray-300 rounded"
+              :placeholder="$t('enterPassword')"
+              @keyup.enter="login"
+            />
+            <button
+              type="button"
+              class="absolute right-2 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-xl text-gray-500 hover:text-gray-700 p-1"
+              :title="showPassword ? $t('hidePassword') : $t('showPassword')"
+              @click="showPassword = !showPassword"
+            >
+              {{ showPassword ? "🙈" : "👁️" }}
+            </button>
+          </div>
         </div>
         <button
           class="w-full px-3 py-2 text-lg text-white bg-blue-600 border-none rounded cursor-pointer hover:bg-blue-700"
@@ -63,6 +73,7 @@ const { $api } = useNuxtApp();
 
 const router = useRouter();
 const loginForm = ref({ username: "", password: "" });
+const showPassword = ref(false);
 const authMessage = ref({ text: "", success: false });
 const authService = useAuthService();
 

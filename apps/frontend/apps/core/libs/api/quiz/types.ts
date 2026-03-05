@@ -1,4 +1,7 @@
-export interface QuizSearchDtoRequest {}
+export interface QuizSearchDtoRequest {
+  page?: number;
+  limit?: number;
+}
 
 export interface PaginationMeta {
   totalItems: number;
@@ -31,3 +34,19 @@ export type QuizDto = {
   isActive: boolean;
   questions: QuestionDto[];
 };
+
+export interface CreateQuizOptionDtoRequest {
+  text: string;
+  isCorrect: boolean;
+}
+
+export interface CreateQuizQuestionDtoRequest {
+  question: string;
+  options: CreateQuizOptionDtoRequest[];
+}
+
+export interface CreateQuizDtoRequest {
+  title: string;
+  description: string;
+  questions: CreateQuizQuestionDtoRequest[];
+}

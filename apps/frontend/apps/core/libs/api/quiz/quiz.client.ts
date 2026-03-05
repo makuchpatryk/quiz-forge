@@ -1,4 +1,5 @@
 import type {
+  CreateQuizDtoRequest,
   PaginationResult,
   QuizDto,
   QuizSearchDtoRequest,
@@ -7,14 +8,19 @@ import type { AxiosInstance } from "axios";
 
 export interface QuizApi {
   search: (payload: QuizSearchDtoRequest) => Promise<PaginationResult<QuizDto>>;
+  create: (payload: CreateQuizDtoRequest) => Promise<QuizDto>;
 }
 
 export const createQuizApi = (axiosInstance: AxiosInstance): QuizApi => ({
   search: async (payload: QuizSearchDtoRequest) => {
     const { data } = await axiosInstance.get<PaginationResult<QuizDto>>(
       "/quiz",
-      payload,
+      { params: payload },
     );
+    return data;
+  },
+  create: async (payload: CreateQuizDtoRequest) => {
+    const { data } = await axiosInstance.post<QuizDto>("/quiz", payload);
     return data;
   },
 });
