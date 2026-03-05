@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Inject,
+  NotFoundException,
   Post,
   Request,
   Res,
@@ -60,9 +61,11 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Get("me")
   async me(@Request() req: RequestAuth) {
-    const { password, ...rest } = await this.userRepository.getUserById(
-      req.user.id
-    );
+    const user = await this.userRepository.getUserById(req.user.id);
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+    const { password, ...rest } = user;
     return rest;
   }
 

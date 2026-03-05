@@ -44,6 +44,7 @@ export class User extends BaseEntity {
   updatedAt!: Date;
 
   @Column({
+    type: "varchar",
     nullable: true,
   })
   refreshToken!: string | null;

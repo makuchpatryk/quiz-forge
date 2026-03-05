@@ -18,8 +18,8 @@ import { AuthService } from "./auth.service";
       },
     }),
   ],
-  providers: [AuthService, AuthService],
+  providers: [AuthService],
   controllers: [AuthController],
-  exports: [AuthService, AuthService],
+  exports: [AuthService],
 })
 export class AuthModule {}
