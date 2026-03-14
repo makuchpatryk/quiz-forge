@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 Random Quiz Generator
+# 🧠 Quiz Forge
 
 A full-stack quiz application where users can browse, play, and submit quizzes while admins manage content through a dedicated dashboard. Built as a monorepo with a modern TypeScript stack.
 
@@ -99,8 +99,8 @@ random-quiz-generator/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/random-quiz-generator.git
-cd random-quiz-generator
+git clone https://github.com/<your-username>/quiz-forge.git
+cd quiz-forge
 
 # 2. Install dependencies
 pnpm install

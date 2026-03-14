@@ -1,5 +1,5 @@
 {
-  "name": "random-quiz-generator",
+  "name": "quiz-forge",
   "private": true,
   "packageManager": "pnpm@9.7.0",
   "scripts": {
