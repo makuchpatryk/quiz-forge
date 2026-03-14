@@ -79,5 +79,8 @@
   "editNotAvailable": "Edycja będzie wkrótce dostępna",
   "deleteNotAvailable": "Usuwanie będzie wkrótce dostępne",
   "showPassword": "Pokaż hasło",
-  "hidePassword": "Ukryj hasło"
+  "hidePassword": "Ukryj hasło",
+  "loadingQuiz": "Ładowanie quizu...",
+  "quizNotFound": "Quiz nie został znaleziony",
+  "loadQuizError": "⚠️ Nie udało się załadować quizu. Spróbuj ponownie później."
 }

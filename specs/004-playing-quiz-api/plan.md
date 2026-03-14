@@ -2,7 +2,7 @@
 
 **Feature Branch**: `004-playing-quiz-api`
 **Created**: March 5, 2026
-**Status**: Draft
+**Status**: Done
 
 ## Kontekst
 

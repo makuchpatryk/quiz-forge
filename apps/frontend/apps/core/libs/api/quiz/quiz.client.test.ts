@@ -173,4 +173,41 @@ describe("Quiz API Client", () => {
       await expect(quizApi.create(createPayload)).rejects.toEqual(error);
     });
   });
+
+  describe("getById", () => {
+    it("should call GET /quiz/:id with the given id", async () => {
+      mockAxios.get.mockResolvedValue({ data: sampleQuiz });
+
+      await quizApi.getById(1);
+
+      expect(mockAxios.get).toHaveBeenCalledWith("/quiz/1");
+    });
+
+    it("should return the quiz data", async () => {
+      mockAxios.get.mockResolvedValue({ data: sampleQuiz });
+
+      const result = await quizApi.getById(1);
+
+      expect(result).toEqual(sampleQuiz);
+      expect(result.id).toBe(1);
+      expect(result.title).toBe("Test Quiz");
+      expect(result.questions).toHaveLength(1);
+    });
+
+    it("should propagate 404 errors", async () => {
+      const error = {
+        response: { status: 404, data: { message: "Quiz not found" } },
+      };
+      mockAxios.get.mockRejectedValue(error);
+
+      await expect(quizApi.getById(999)).rejects.toEqual(error);
+    });
+
+    it("should propagate network errors", async () => {
+      const error = new Error("Network Error");
+      mockAxios.get.mockRejectedValue(error);
+
+      await expect(quizApi.getById(1)).rejects.toThrow("Network Error");
+    });
+  });
 });
