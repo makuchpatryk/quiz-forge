@@ -10,6 +10,7 @@ A full-stack quiz application where users can browse, play, and submit quizzes w
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791?logo=postgresql)
 ![Turborepo](https://img.shields.io/badge/Turborepo-2-blueviolet?logo=turborepo)
 ![pnpm](https://img.shields.io/badge/pnpm-9-orange?logo=pnpm)
+![CI](https://img.shields.io/github/actions/workflow/status/<your-username>/random-quiz-generator/ci.yml?branch=main&label=CI&logo=githubactions)
 
 <!-- TODO: Uncomment when deployed -->
 <!-- [🔗 Live Demo](https://your-demo-url.com) -->
