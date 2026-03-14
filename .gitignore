@@ -7,6 +7,7 @@ dist
 .env
 turbo-build.log
 .output/
+.claude/
 .turbo/turbo-dev.log
-playwright-report
-test-results
+playwright-report/
+test-results/
