@@ -6,5 +6,5 @@ export class AuthRefreshDto {
     description: "Refresh token",
   })
   @IsNotEmpty()
-  refreshToken: string;
+  refreshToken!: string;
 }

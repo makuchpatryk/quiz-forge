@@ -26,22 +26,44 @@
         </div>
         <div class="mb-4">
           <label class="block mb-2">{{ $t("password") }}</label>
-          <input
-            type="password"
-            v-model="registerForm.password"
-            class="w-full px-3 py-2 text-base border border-gray-300 rounded"
-            :placeholder="$t('choosePassword')"
-          />
+          <div class="relative">
+            <input
+              :type="showPassword ? 'text' : 'password'"
+              v-model="registerForm.password"
+              class="w-full px-3 py-2 pr-10 text-base border border-gray-300 rounded"
+              :placeholder="$t('choosePassword')"
+            />
+            <button
+              type="button"
+              class="absolute right-2 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-xl text-gray-500 hover:text-gray-700 p-1"
+              :title="showPassword ? $t('hidePassword') : $t('showPassword')"
+              @click="showPassword = !showPassword"
+            >
+              {{ showPassword ? "🙈" : "👁️" }}
+            </button>
+          </div>
         </div>
         <div class="mb-4">
           <label class="block mb-2">{{ $t("repeatPassword") }}</label>
-          <input
-            type="password"
-            v-model="registerForm.passwordConfirm"
-            class="w-full px-3 py-2 text-base border border-gray-300 rounded"
-            :placeholder="$t('repeatPasswordPlaceholder')"
-            @keyup.enter="register"
-          />
+          <div class="relative">
+            <input
+              :type="showPasswordConfirm ? 'text' : 'password'"
+              v-model="registerForm.passwordConfirm"
+              class="w-full px-3 py-2 pr-10 text-base border border-gray-300 rounded"
+              :placeholder="$t('repeatPasswordPlaceholder')"
+              @keyup.enter="register"
+            />
+            <button
+              type="button"
+              class="absolute right-2 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-xl text-gray-500 hover:text-gray-700 p-1"
+              :title="
+                showPasswordConfirm ? $t('hidePassword') : $t('showPassword')
+              "
+              @click="showPasswordConfirm = !showPasswordConfirm"
+            >
+              {{ showPasswordConfirm ? "🙈" : "👁️" }}
+            </button>
+          </div>
         </div>
         <button
           class="w-full px-3 py-2 text-lg text-white bg-blue-600 border-none rounded cursor-pointer hover:bg-blue-700"
@@ -84,6 +106,8 @@ const registerForm = ref({
   passwordConfirm: "",
 });
 const authMessage = ref({ text: "", success: false });
+const showPassword = ref(false);
+const showPasswordConfirm = ref(false);
 
 async function register() {
   const { username, email, password, passwordConfirm } = registerForm.value;

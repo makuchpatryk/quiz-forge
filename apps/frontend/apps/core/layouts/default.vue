@@ -8,9 +8,8 @@
 
 <script setup lang="ts">
 import { useAuthService } from "@auth/composables/auth.ts";
-import { AxiosError } from "axios";
-const authService = useAuthService();
 
+const authService = useAuthService();
 const router = useRouter();
 const { $api } = useNuxtApp();
 
@@ -18,11 +17,12 @@ async function checkAndSetMe() {
   if (authService.getCurrentUser()) {
     return;
   }
+
   try {
     const response = await $api.auth.getMe();
     authService.setCurrentUser(response);
-  } catch (error) {
-    if (error instanceof AxiosError && error.response?.status === 401) {
+  } catch (error: any) {
+    if (error?.response?.status === 401) {
       authService.setCurrentUser(null);
       await router.push("/auth/login");
     } else {
@@ -33,7 +33,5 @@ async function checkAndSetMe() {
 
 onMounted(async () => {
   await checkAndSetMe();
-
-  if (!authService.getAccessToken()) await router.push("/auth/login");
 });
 </script>

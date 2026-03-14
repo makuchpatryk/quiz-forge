@@ -1,11 +1,17 @@
 <template>
   <div class="mx-auto p-8">
-    <div v-if="!showScore">
+    <div v-if="isLoading" class="text-center py-12">
+      <div class="text-lg text-gray-500">{{ $t("loadingQuiz") }}</div>
+    </div>
+    <div v-else-if="errorMessage" class="text-center py-12">
+      <div class="text-lg text-red-600">{{ errorMessage }}</div>
+    </div>
+    <div v-else-if="!showScore">
       <div class="text-lg mb-4">
         {{ $t("question") }} {{ currentQuestionIndex + 1 }} {{ $t("of") }}
         {{ questions.length }}
       </div>
-      <h1 class="text-2xl mb-6 font-bold">{{ currentQuestion.question }}</h1>
+      <h1 class="text-2xl mb-6 font-bold">{{ currentQuestion.text }}</h1>
       <div class="flex flex-col gap-3 mb-6">
         <div
           v-for="(option, index) in currentQuestion.options"
@@ -14,7 +20,7 @@
           :class="getOptionClass(index)"
           @click="selectOption(index)"
         >
-          {{ option }}
+          {{ option.text }}
         </div>
       </div>
       <button
@@ -40,18 +46,24 @@
 </template>
 
 <script lang="ts" setup>
+import type { QuestionDto } from "~/apps/core/libs/api/quiz/types";
+
 const router = useRouter();
 const { t } = useI18n();
-const questions = ref<any[]>([]);
+const { $api } = useNuxtApp();
+
+const questions = ref<QuestionDto[]>([]);
 const currentQuestionIndex = ref(0);
 const quizScore = ref(0);
 const answered = ref(false);
 const selectedOption = ref<number | null>(null);
 const showScore = ref(false);
+const isLoading = ref(true);
+const errorMessage = ref<string | null>(null);
 
 const currentQuestion = computed(() => {
   return (
-    questions.value[currentQuestionIndex.value] || { question: "", options: [] }
+    questions.value[currentQuestionIndex.value] || { text: "", options: [] }
   );
 });
 
@@ -69,12 +81,16 @@ const scoreMessage = computed(() => {
   return t("scoreTryAgain");
 });
 
+const correctIndex = computed(() =>
+  currentQuestion.value.options.findIndex((o) => o.isCorrect),
+);
+
 const selectOption = (index: number) => {
   if (answered.value) return;
   answered.value = true;
   selectedOption.value = index;
   setTimeout(() => {
-    if (index === currentQuestion.value.correct) {
+    if (currentQuestion.value.options[index]?.isCorrect) {
       quizScore.value++;
     }
     if (isLastQuestion.value) {
@@ -88,9 +104,11 @@ const selectOption = (index: number) => {
 const getOptionClass = (index: number) => {
   if (!answered.value) return "";
   if (index === selectedOption.value) {
-    return index === currentQuestion.value.correct ? "!bg-green-200 !border-green-600" : "!bg-red-200 !border-red-600";
+    return index === correctIndex.value
+      ? "!bg-green-200 !border-green-600"
+      : "!bg-red-200 !border-red-600";
   }
-  if (index === currentQuestion.value.correct) {
+  if (index === correctIndex.value) {
     return "!bg-green-200 !border-green-600";
   }
   return "";
@@ -110,26 +128,22 @@ const restartQuiz = () => {
   showScore.value = false;
 };
 
-onMounted(() => {
-  // Pobierz quiz z localStorage lub store (przykład: quizId w query)
+onMounted(async () => {
   const quizId = router.currentRoute.value.query.quizId as string;
-  const quizzes = JSON.parse(localStorage.getItem("quizzes") || "{}");
-  if (quizId && quizzes[quizId]) {
-    questions.value = quizzes[quizId].questions;
-  } else {
-    // fallback: domyślny quiz
-    questions.value = [
-      {
-        question: "Jaka jest stolica Francji?",
-        options: ["Londyn", "Berlin", "Paryż", "Madryt"],
-        correct: 2,
-      },
-      {
-        question: "Który ocean jest największy?",
-        options: ["Atlantycki", "Spokojny", "Indyjski", "Arktyczny"],
-        correct: 1,
-      },
-    ];
+
+  if (!quizId) {
+    router.push("/quiz-selection");
+    return;
+  }
+
+  try {
+    isLoading.value = true;
+    const result = await $api.quiz.getById(Number(quizId));
+    questions.value = result.questions;
+  } catch (e) {
+    errorMessage.value = t("loadQuizError");
+  } finally {
+    isLoading.value = false;
   }
 });
 </script>

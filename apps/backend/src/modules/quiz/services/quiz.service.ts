@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import {
   IPaginationOptions,
@@ -40,12 +40,16 @@ export class QuizService {
   }
 
   async getQuizById(id: number): Promise<Quiz> {
-    return await this.quizRepository.findOne({
+    const quiz = await this.quizRepository.findOne({
       where: {
         id,
       },
       relations: ["questions", "questions.options"],
     });
+    if (!quiz) {
+      throw new NotFoundException(`Quiz with id ${id} not found`);
+    }
+    return quiz;
   }
 
   async createNewQuiz(dto: CreateQuizDto) {

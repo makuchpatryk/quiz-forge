@@ -2,7 +2,7 @@
   <div class="mx-auto p-8">
     <back-to-daschboard />
     <h1 class="text-center mb-8 text-3xl font-bold">
-      {{ editingQuizId ? $t("editQuiz") : $t("createQuiz") }}
+      {{ $t("createQuiz") }}
     </h1>
     <div class="mb-5">
       <label class="block mb-2">{{ $t("quizName") }}</label>
@@ -34,7 +34,10 @@
         <span class="font-bold text-lg"
           >{{ $t("question") }} {{ qIndex + 1 }}</span
         >
-        <button class="bg-red-600 text-white border-none rounded-md px-3 py-1 cursor-pointer hover:bg-red-700" @click="removeQuestion(qIndex)">
+        <button
+          class="bg-red-600 text-white border-none rounded-md px-3 py-1 cursor-pointer hover:bg-red-700"
+          @click="removeQuestion(qIndex)"
+        >
           {{ $t("remove") }}
         </button>
       </div>
@@ -74,34 +77,50 @@
         </div>
       </div>
     </div>
-    <button class="mt-3 px-4 py-2 text-base border-none rounded-md bg-blue-600 text-white cursor-pointer hover:bg-blue-700" @click="addQuestion">
+    <button
+      class="mt-3 px-4 py-2 text-base border-none rounded-md bg-blue-600 text-white cursor-pointer hover:bg-blue-700"
+      @click="addQuestion"
+    >
       + {{ $t("addQuestion") }}
     </button>
     <div class="flex gap-5 mt-6">
-      <button class="px-5 py-2 text-base border-none rounded-md bg-green-600 text-white cursor-pointer hover:bg-green-700" @click="saveQuiz">
-        💾 {{ $t("saveQuiz") }}
+      <button
+        class="px-5 py-2 text-base border-none rounded-md bg-green-600 text-white cursor-pointer hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        :disabled="isSubmitting"
+        @click="saveQuiz"
+      >
+        💾 {{ isSubmitting ? $t("saving") : $t("saveQuiz") }}
       </button>
-      <NuxtLink class="px-5 py-2 text-base border-none rounded-md bg-red-600 text-white cursor-pointer no-underline flex items-center justify-center hover:bg-red-700" to="/dashboard">
+      <NuxtLink
+        class="px-5 py-2 text-base border-none rounded-md bg-red-600 text-white cursor-pointer no-underline flex items-center justify-center hover:bg-red-700"
+        to="/dashboard"
+      >
         ❌ {{ $t("cancel") }}
       </NuxtLink>
     </div>
-    <div class="mt-5 text-center" :class="quizMessage.success ? 'text-green-600' : 'text-red-600'">
+    <div
+      class="mt-5 text-center"
+      :class="quizMessage.success ? 'text-green-600' : 'text-red-600'"
+    >
       {{ quizMessage.text }}
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+import type { CreateQuizDtoRequest } from "@core/libs/api/quiz/types";
+import type { AxiosError } from "axios";
+
 const router = useRouter();
 const { t } = useI18n();
-const currentUser = ref<string | null>(null);
-const quizzes = ref<Record<string, any>>({});
-const editingQuizId = ref<string | null>(null);
+const { $api } = useNuxtApp();
+
 const quizForm = ref({
   name: "",
   description: "",
   questions: [createEmptyQuestion()],
 });
 const quizMessage = ref({ text: "", success: false });
+const isSubmitting = ref(false);
 
 function createEmptyQuestion() {
   return {
@@ -123,7 +142,23 @@ function removeQuestion(index: number) {
   quizForm.value.questions.splice(index, 1);
 }
 
-function saveQuiz() {
+function mapFormToCreateQuizDto(
+  form: typeof quizForm.value,
+): CreateQuizDtoRequest {
+  return {
+    title: form.name,
+    description: form.description,
+    questions: form.questions.map((q) => ({
+      question: q.question,
+      options: q.options.map((text, oIndex) => ({
+        text,
+        isCorrect: oIndex === q.correct,
+      })),
+    })),
+  };
+}
+
+async function saveQuiz() {
   const { name, description, questions } = quizForm.value;
   if (!name) {
     quizMessage.value = { text: t("quizNameRequired"), success: false };
@@ -167,44 +202,25 @@ function saveQuiz() {
     };
     return;
   }
-  const quizId = editingQuizId.value || `quiz-${Date.now()}`;
-  quizzes.value[quizId] = {
-    id: quizId,
-    name,
-    description,
-    questions: questions.map((q: any) => ({
-      question: q.question,
-      options: q.options,
-      correct: q.correct,
-    })),
-    author: currentUser.value,
-    isPublic: true,
-    createdAt: editingQuizId.value
-      ? quizzes.value[quizId].createdAt
-      : new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  };
-  localStorage.setItem("quizzes", JSON.stringify(quizzes.value));
-  quizMessage.value = { text: t("quizSavedSuccess"), success: true };
-  setTimeout(() => {
-    router.push("/dashboard");
-  }, 1000);
-}
 
-onMounted(() => {
-  quizzes.value = JSON.parse(localStorage.getItem("quizzes") || "{}");
-  const savedUser = localStorage.getItem("currentUser");
-  if (savedUser) currentUser.value = savedUser;
-  // Obsługa edycji quizu przez query (?edit=quizId)
-  const editId = router.currentRoute.value.query.edit as string;
-  if (editId && quizzes.value[editId]) {
-    editingQuizId.value = editId;
-    const quiz = quizzes.value[editId];
-    quizForm.value = {
-      name: quiz.name,
-      description: quiz.description,
-      questions: JSON.parse(JSON.stringify(quiz.questions)),
-    };
+  isSubmitting.value = true;
+  quizMessage.value = { text: "", success: false };
+
+  try {
+    await $api.quiz.create(mapFormToCreateQuizDto(quizForm.value));
+    quizMessage.value = { text: t("quizSavedSuccess"), success: true };
+    setTimeout(() => {
+      router.push("/dashboard");
+    }, 1000);
+  } catch (err) {
+    const axiosError = err as AxiosError<{ message: string | string[] }>;
+    const msg = axiosError.response?.data?.message;
+    const errorText = Array.isArray(msg)
+      ? msg.join(", ")
+      : msg || t("quizSaveError");
+    quizMessage.value = { text: errorText, success: false };
+  } finally {
+    isSubmitting.value = false;
   }
-});
+}
 </script>

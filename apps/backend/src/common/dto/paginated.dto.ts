@@ -7,8 +7,8 @@ interface PaginationMeta {
 }
 
 class PaginatedDto<TData> {
-  items: TData[];
-  meta: PaginationMeta;
+  items!: TData[];
+  meta!: PaginationMeta;
 }
 
 export { PaginationMeta, PaginatedDto };

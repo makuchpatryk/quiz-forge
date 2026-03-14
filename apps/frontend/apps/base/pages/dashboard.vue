@@ -10,17 +10,29 @@
     >
       + {{ $t("createQuiz") }}
     </NuxtLink>
-    <div v-if="userQuizzes.length > 0">
+
+    <!-- Stan ładowania -->
+    <div v-if="isLoading" class="text-center text-gray-500 mt-8">
+      <div class="text-4xl mb-2 animate-spin">⏳</div>
+      <p>{{ $t("loadingQuizzes") }}</p>
+    </div>
+
+    <!-- Błąd z API -->
+    <div v-else-if="errorMessage" class="text-center text-red-500 mt-8">
+      <div class="text-4xl mb-2">⚠️</div>
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <div v-else-if="quizzes.length > 0">
       <div
-        v-for="quiz in userQuizzes"
+        v-for="quiz in quizzes"
         :key="quiz.id"
         class="bg-gray-50 rounded-lg p-5 mb-5"
       >
-        <h3 class="text-xl font-bold mb-2">{{ quiz.name }}</h3>
+        <h3 class="text-xl font-bold mb-2">{{ quiz.title }}</h3>
         <p class="text-gray-700 mb-2">{{ quiz.description }}</p>
         <div class="mt-2 text-sm text-gray-600 flex gap-4">
           <span>📝 {{ quiz.questions.length }} {{ $t("questions") }}</span>
-          <span>📅 {{ formatDate(quiz.createdAt) }}</span>
         </div>
         <div class="flex gap-3 mt-3">
           <NuxtLink
@@ -29,15 +41,19 @@
           >
             ▶️ {{ $t("play") }}
           </NuxtLink>
-          <NuxtLink
-            class="px-4 py-2 text-base border-none rounded-md cursor-pointer no-underline text-gray-800 bg-yellow-400 transition-all flex items-center gap-1 hover:brightness-90"
-            :to="{ path: '/create-quiz', query: { edit: quiz.id } }"
+          <!-- TODO: Włączyć po dodaniu endpointu PUT/PATCH /quiz/:id na backendzie -->
+          <button
+            class="px-4 py-2 text-base border-none rounded-md cursor-not-allowed no-underline text-gray-800 bg-yellow-400 opacity-50 transition-all flex items-center gap-1"
+            disabled
+            :title="$t('editNotAvailable')"
           >
             ✏️ {{ $t("edit") }}
-          </NuxtLink>
+          </button>
+          <!-- TODO: Włączyć po dodaniu endpointu DELETE /quiz/:id na backendzie -->
           <button
-            class="px-4 py-2 text-base border-none rounded-md cursor-pointer text-white bg-red-600 transition-all flex items-center gap-1 hover:brightness-90"
-            @click="deleteQuiz(quiz.id)"
+            class="px-4 py-2 text-base border-none rounded-md cursor-not-allowed text-white bg-red-600 opacity-50 transition-all flex items-center gap-1"
+            disabled
+            :title="$t('deleteNotAvailable')"
           >
             🗑️ {{ $t("delete") }}
           </button>
@@ -51,31 +67,26 @@
   </div>
 </template>
 <script lang="ts" setup>
-const router = useRouter();
-const currentUser = ref<string | null>(null);
-const quizzes = ref<Record<string, any>>({});
+import type { QuizDto } from "~/apps/core/libs/api/quiz/types";
 
-const userQuizzes = computed(() => {
-  return Object.values(quizzes.value).filter(
-    (quiz: any) => quiz.author === currentUser.value,
-  );
-});
-
+const { $api } = useNuxtApp();
 const { t } = useI18n();
 
-function deleteQuiz(quizId: string) {
-  if (!confirm(t("deleteConfirm"))) {
-    return;
+const quizzes = ref<QuizDto[]>([]);
+const isLoading = ref(false);
+const errorMessage = ref<string | null>(null);
+
+onMounted(async () => {
+  isLoading.value = true;
+  errorMessage.value = null;
+  try {
+    const result = await $api.quiz.search({ page: 1, limit: 20 });
+    quizzes.value = result.items;
+  } catch (error) {
+    errorMessage.value = t("loadQuizzesError");
+    console.error("Failed to load quizzes:", error);
+  } finally {
+    isLoading.value = false;
   }
-  delete quizzes.value[quizId];
-  localStorage.setItem("quizzes", JSON.stringify(quizzes.value));
-}
-
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString("pl-PL");
-}
-
-onMounted(() => {
-  quizzes.value = JSON.parse(localStorage.getItem("quizzes") || "{}");
 });
 </script>
