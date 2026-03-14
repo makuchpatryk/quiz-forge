@@ -8,3 +8,5 @@ dist
 turbo-build.log
 .output/
 .turbo/turbo-dev.log
+playwright-report
+test-results
