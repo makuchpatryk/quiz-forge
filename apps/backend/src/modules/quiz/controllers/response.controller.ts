@@ -15,7 +15,7 @@ export class ResponseController {
     return fromEvent(this.eventEmitter, events.RESPONSE_SUBMITTED).pipe(
       map((data) => ({
         data,
-      }))
+      })),
     );
   }
   @Post("")

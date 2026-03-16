@@ -12,7 +12,7 @@ import { UserRepository } from "../user/domain/user.repository";
 export class RolesGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
-    @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository
+    @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {

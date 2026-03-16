@@ -20,7 +20,7 @@ export class UserRepositoryImpl implements UserRepository {
 
   async getUserByProviderId(
     provider: string,
-    providerId: string
+    providerId: string,
   ): Promise<UserDomain | null> {
     const ormUser = await UserOrm.findOne({ where: { provider, providerId } });
     return ormUser ? UserMapper.toDomain(ormUser) : null;
@@ -42,7 +42,7 @@ export class UserRepositoryImpl implements UserRepository {
 
   async updateRefreshToken(
     userId: string,
-    refreshToken: string
+    refreshToken: string,
   ): Promise<UserDomain> {
     const userToUpdate = new UserDomain();
     userToUpdate.refreshToken = refreshToken;

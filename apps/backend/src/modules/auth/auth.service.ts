@@ -18,23 +18,26 @@ import { AuthProvider } from "../../database/entities/user.enum";
 export class AuthService {
   constructor(
     @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
   async login(userLoginDto: UserLoginDto): Promise<TokenModel> {
     const user = await this.userRepository.getUserByEmail(
-      userLoginDto.username
+      userLoginDto.username,
     );
 
     if (!user) throw new BadRequestException();
 
     if (user.provider && user.provider !== AuthProvider.LOCAL) {
       throw new BadRequestException(
-        `To konto jest powiązane z ${user.provider}. Użyj logowania OAuth.`
+        `To konto jest powiązane z ${user.provider}. Użyj logowania OAuth.`,
       );
     }
 
-    if (!user.password || !(await bcrypt.compare(userLoginDto.password, user.password)))
+    if (
+      !user.password ||
+      !(await bcrypt.compare(userLoginDto.password, user.password))
+    )
       throw new UnauthorizedException();
 
     const tokens = await this.generateTokens(user);

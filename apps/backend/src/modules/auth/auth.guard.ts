@@ -31,11 +31,13 @@ export class AuthGuard implements CanActivate {
       const resp = await this.authService.validateToken(authToken);
       request.user = { name: resp.name, id: resp.sub };
       return true;
-    } catch (error: any) {
-      console.log("auth error - ", error.message);
-      throw new UnauthorizedException(
-        error.message || "session expired! Please sign In"
-      );
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "session expired! Please sign In";
+      console.log("auth error - ", message);
+      throw new UnauthorizedException(message);
     }
   }
 }

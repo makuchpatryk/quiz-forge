@@ -1,30 +1,30 @@
-import { applyDecorators, Type } from '@nestjs/common';
-import { ApiExtraModels, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
-import { PaginatedDto } from '../dto/paginated.dto';
+import { applyDecorators, Type } from "@nestjs/common";
+import { ApiExtraModels, ApiOkResponse, getSchemaPath } from "@nestjs/swagger";
+import { PaginatedDto } from "../dto/paginated.dto";
 
 interface IPaginatedDecoratorApiResponse {
-  model: Type<any>;
+  model: Type<unknown>;
   description?: string;
 }
 
-export const ApiPaginatedResponse = <TModel extends Type<any>>(
+export const ApiPaginatedResponse = (
   options: IPaginatedDecoratorApiResponse,
 ) => {
   return applyDecorators(
     ApiExtraModels(PaginatedDto),
     ApiOkResponse({
-      description: options.description || 'Successfully received model list',
+      description: options.description || "Successfully received model list",
       schema: {
         allOf: [
           { $ref: getSchemaPath(PaginatedDto) },
           {
             properties: {
               items: {
-                type: 'array',
+                type: "array",
                 items: { $ref: getSchemaPath(options.model) },
               },
               meta: {
-                type: 'any',
+                type: "any",
                 default: {
                   totalItems: 2,
                   itemCount: 2,

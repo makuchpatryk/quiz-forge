@@ -38,7 +38,7 @@ export class QuizController {
   @ApiPaginatedResponse({ model: Quiz, description: "List of quizzes" })
   async getAllQuiz(
     @Query("page", new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
-    @Query("limit", new DefaultValuePipe(10), ParseIntPipe) limit: number = 1
+    @Query("limit", new DefaultValuePipe(10), ParseIntPipe) limit: number = 1,
   ): Promise<Pagination<Quiz>> {
     const options: IPaginationOptions = {
       limit,

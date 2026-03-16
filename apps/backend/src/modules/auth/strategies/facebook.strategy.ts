@@ -19,8 +19,8 @@ export class FacebookStrategy extends PassportStrategy(Strategy, "facebook") {
   async validate(
     accessToken: string,
     refreshToken: string,
-    profile: any,
-    done: Function
+    profile: { emails?: { value: string }[]; displayName: string; id: string },
+    done: (error: Error | null, user?: unknown) => void,
   ) {
     const { emails, displayName, id } = profile;
     if (!emails || !emails.length) {
@@ -37,4 +37,3 @@ export class FacebookStrategy extends PassportStrategy(Strategy, "facebook") {
     done(null, tokens);
   }
 }
-

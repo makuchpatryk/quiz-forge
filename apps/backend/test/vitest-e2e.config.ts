@@ -1,17 +1,17 @@
-import { defineConfig } from 'vitest/config';
-import { resolve } from 'path';
+import { defineConfig } from "vitest/config";
+import { resolve } from "path";
 
 export default defineConfig({
-    test: {
-        globals: true,
-        environment: 'node',
-        setupFiles: ['./test/e2e-setup.ts'],
-        include: ['test/**/*.e2e-spec.{js,ts}'],
-        testTimeout: 30000,
+  test: {
+    globals: true,
+    environment: "node",
+    setupFiles: ["./test/e2e-setup.ts"],
+    include: ["test/**/*.e2e-spec.{js,ts}"],
+    testTimeout: 30000,
+  },
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "../src"),
     },
-    resolve: {
-        alias: {
-            '@': resolve(__dirname, '../src'),
-        },
-    },
+  },
 });

@@ -15,7 +15,7 @@ import { Response } from "express";
 import { AuthService } from "./auth.service";
 import { UserLoginDto } from "./dto/login.dto";
 import { AuthGuard } from "./auth.guard";
-import { RequestAuth } from "../../common/types";
+import { RequestAuth, RequestOAuth } from "../../common/types";
 import { USER_REPOSITORY } from "../user/domain/user.token";
 import { UserRepository } from "../user/domain/user.repository";
 
@@ -34,13 +34,13 @@ export class AuthController {
   constructor(
     private authService: AuthService,
     @Inject(USER_REPOSITORY)
-    private readonly userRepository: UserRepository
+    private readonly userRepository: UserRepository,
   ) {}
 
   @Post("login")
   async login(
     @Body() userLoginDto: UserLoginDto,
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
     const tokens = await this.authService.login(userLoginDto);
 
@@ -66,7 +66,7 @@ export class AuthController {
     if (!user) {
       throw new NotFoundException("User not found");
     }
-    const { password, providerId, ...rest } = user;
+    const { password: _password, providerId: _providerId, ...rest } = user;
     return rest;
   }
 
@@ -79,7 +79,7 @@ export class AuthController {
 
   @Get("google/callback")
   @UseGuards(PassportAuthGuard("google"))
-  googleCallback(@Request() req: any, @Res() res: Response) {
+  googleCallback(@Request() req: RequestOAuth, @Res() res: Response) {
     this.handleOAuthCallback(req, res);
   }
 
@@ -92,7 +92,7 @@ export class AuthController {
 
   @Get("facebook/callback")
   @UseGuards(PassportAuthGuard("facebook"))
-  facebookCallback(@Request() req: any, @Res() res: Response) {
+  facebookCallback(@Request() req: RequestOAuth, @Res() res: Response) {
     this.handleOAuthCallback(req, res);
   }
 
@@ -100,7 +100,7 @@ export class AuthController {
   @Post("refresh")
   async refresh(
     @Request() req: RequestAuth,
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
     const refreshToken = req.cookies?.refreshToken;
     if (!refreshToken) {
@@ -129,7 +129,7 @@ export class AuthController {
   @Post("logout")
   async logout(
     @Request() req: RequestAuth,
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
     await this.authService.logout(req.user.id);
 
@@ -142,7 +142,7 @@ export class AuthController {
     return { message: "Logged out successfully" };
   }
 
-  private handleOAuthCallback(req: any, res: Response) {
+  private handleOAuthCallback(req: RequestOAuth, res: Response) {
     const tokens = req.user;
     res.cookie("accessToken", tokens.accessToken, {
       ...COOKIE_OPTIONS,

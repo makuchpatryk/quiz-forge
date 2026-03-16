@@ -48,13 +48,13 @@ vi.stubGlobal("useNuxtApp", () => ({ $api: mockApi }));
 vi.stubGlobal("useI18n", () => ({
   t: (key: string) => key,
 }));
-vi.stubGlobal("ref", (val: any) => ({ value: val }));
+vi.stubGlobal("ref", (val: unknown) => ({ value: val }));
 vi.stubGlobal("useRouter", () => ({
   push: vi.fn(),
   back: vi.fn(),
 }));
-vi.stubGlobal("onMounted", (fn: Function) => fn());
-vi.stubGlobal("computed", (fn: Function) => ({ value: fn() }));
+vi.stubGlobal("onMounted", (fn: () => void) => fn());
+vi.stubGlobal("computed", (fn: () => unknown) => ({ value: fn() }));
 
 // ── tests ────────────────────────────────────────────────
 
@@ -171,7 +171,7 @@ describe("Dashboard — API integration logic", () => {
 
   describe("Stany UI dashboardu", () => {
     it("isLoading powinno być ustawione podczas ładowania", async () => {
-      let resolveSearch: (value: any) => void;
+      let resolveSearch: (value: unknown) => void;
       const searchPromise = new Promise((resolve) => {
         resolveSearch = resolve;
       });

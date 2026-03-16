@@ -1,12 +1,12 @@
 enum UserRoles {
-  ADMIN = 'admin',
-  MEMBER = 'member',
+  ADMIN = "admin",
+  MEMBER = "member",
 }
 
 enum AuthProvider {
-  LOCAL = 'local',
-  GOOGLE = 'google',
-  FACEBOOK = 'facebook',
+  LOCAL = "local",
+  GOOGLE = "google",
+  FACEBOOK = "facebook",
 }
 
 export { UserRoles, AuthProvider };

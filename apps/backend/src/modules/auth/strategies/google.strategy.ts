@@ -18,8 +18,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
   async validate(
     accessToken: string,
     refreshToken: string,
-    profile: any,
-    done: VerifyCallback
+    profile: { emails: { value: string }[]; displayName: string; id: string },
+    done: VerifyCallback,
   ) {
     const { emails, displayName, id } = profile;
     const oauthProfile = {
@@ -32,4 +32,3 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
     done(null, tokens);
   }
 }
-

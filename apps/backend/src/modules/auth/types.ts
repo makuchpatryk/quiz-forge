@@ -11,4 +11,3 @@ export interface OAuthProfile {
   provider: "google" | "facebook";
   providerId: string;
 }
-
