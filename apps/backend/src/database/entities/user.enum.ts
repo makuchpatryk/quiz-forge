@@ -3,4 +3,10 @@ enum UserRoles {
   MEMBER = 'member',
 }
 
-export { UserRoles };
+enum AuthProvider {
+  LOCAL = 'local',
+  GOOGLE = 'google',
+  FACEBOOK = 'facebook',
+}
+
+export { UserRoles, AuthProvider };

@@ -9,6 +9,7 @@ import {
   Res,
   UseGuards,
 } from "@nestjs/common";
+import { AuthGuard as PassportAuthGuard } from "@nestjs/passport";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 import { AuthService } from "./auth.service";
@@ -21,7 +22,7 @@ import { UserRepository } from "../user/domain/user.repository";
 const COOKIE_OPTIONS = {
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
-  sameSite: "strict" as const,
+  sameSite: "lax" as const,
 };
 
 const ACCESS_TOKEN_MAX_AGE = 60 * 60 * 1000; // 1 hour
@@ -65,8 +66,34 @@ export class AuthController {
     if (!user) {
       throw new NotFoundException("User not found");
     }
-    const { password, ...rest } = user;
+    const { password, providerId, ...rest } = user;
     return rest;
+  }
+
+  // === Google OAuth ===
+  @Get("google")
+  @UseGuards(PassportAuthGuard("google"))
+  googleLogin() {
+    // Passport automatycznie przekieruje do Google
+  }
+
+  @Get("google/callback")
+  @UseGuards(PassportAuthGuard("google"))
+  googleCallback(@Request() req: any, @Res() res: Response) {
+    this.handleOAuthCallback(req, res);
+  }
+
+  // === Facebook OAuth ===
+  @Get("facebook")
+  @UseGuards(PassportAuthGuard("facebook"))
+  facebookLogin() {
+    // Passport automatycznie przekieruje do Facebook
+  }
+
+  @Get("facebook/callback")
+  @UseGuards(PassportAuthGuard("facebook"))
+  facebookCallback(@Request() req: any, @Res() res: Response) {
+    this.handleOAuthCallback(req, res);
   }
 
   @ApiBearerAuth()
@@ -113,5 +140,19 @@ export class AuthController {
     });
 
     return { message: "Logged out successfully" };
+  }
+
+  private handleOAuthCallback(req: any, res: Response) {
+    const tokens = req.user;
+    res.cookie("accessToken", tokens.accessToken, {
+      ...COOKIE_OPTIONS,
+      maxAge: ACCESS_TOKEN_MAX_AGE,
+    });
+    res.cookie("refreshToken", tokens.refreshToken, {
+      ...COOKIE_OPTIONS,
+      maxAge: REFRESH_TOKEN_MAX_AGE,
+      path: "/auth",
+    });
+    res.redirect(process.env.FRONTEND_URL || "http://localhost:3000");
   }
 }

@@ -3,12 +3,16 @@ import { AuthController } from "./auth.controller";
 import { UserModule } from "../user/user.module";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule } from "@nestjs/config";
+import { PassportModule } from "@nestjs/passport";
 import { AuthService } from "./auth.service";
+import { GoogleStrategy } from "./strategies/google.strategy";
+import { FacebookStrategy } from "./strategies/facebook.strategy";
 
 @Module({
   imports: [
     ConfigModule,
     UserModule,
+    PassportModule.register({}),
     JwtModule.registerAsync({
       useFactory: () => {
         return {
@@ -18,7 +22,7 @@ import { AuthService } from "./auth.service";
       },
     }),
   ],
-  providers: [AuthService],
+  providers: [AuthService, GoogleStrategy, FacebookStrategy],
   controllers: [AuthController],
   exports: [AuthService],
 })

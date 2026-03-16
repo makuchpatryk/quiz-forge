@@ -17,6 +17,7 @@ export interface UserResponse {
   role: string;
   id: string;
   email: string;
+  provider?: string;
   updatedAt: string;
   createdAt: string;
 }

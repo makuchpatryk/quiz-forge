@@ -82,5 +82,11 @@
   "hidePassword": "Ukryj hasło",
   "loadingQuiz": "Ładowanie quizu...",
   "quizNotFound": "Quiz nie został znaleziony",
-  "loadQuizError": "⚠️ Nie udało się załadować quizu. Spróbuj ponownie później."
+  "loadQuizError": "⚠️ Nie udało się załadować quizu. Spróbuj ponownie później.",
+  "orLoginWith": "lub zaloguj się przez",
+  "loginWithGoogle": "Zaloguj się przez Google",
+  "loginWithFacebook": "Zaloguj się przez Facebook",
+  "oauthLoginFailed": "⚠️ Logowanie OAuth nie powiodło się. Spróbuj ponownie.",
+  "pleaseEnterCredentials": "⚠️ Wprowadź login i hasło!",
+  "loginError": "⚠️ Błąd logowania. Sprawdź dane i spróbuj ponownie."
 }

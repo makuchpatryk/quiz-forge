@@ -18,6 +18,14 @@ export class UserRepositoryImpl implements UserRepository {
     return ormUser ? UserMapper.toDomain(ormUser) : null;
   }
 
+  async getUserByProviderId(
+    provider: string,
+    providerId: string
+  ): Promise<UserDomain | null> {
+    const ormUser = await UserOrm.findOne({ where: { provider, providerId } });
+    return ormUser ? UserMapper.toDomain(ormUser) : null;
+  }
+
   async create(user: UserDomain): Promise<UserDomain> {
     const ormUser = UserMapper.toOrm(user);
     return UserMapper.toDomain(await UserOrm.save(ormUser));
