@@ -8,7 +8,7 @@ import { UserRepository } from "../domain/user.repository";
 export class UserCreateUseCase {
   constructor(
     @Inject(USER_REPOSITORY)
-    private readonly userRepository: UserRepository
+    private readonly userRepository: UserRepository,
   ) {}
   async execute(userRegister: UserRegisterRequestDto): Promise<User> {
     const user = new User();

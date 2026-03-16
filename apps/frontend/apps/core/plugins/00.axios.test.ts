@@ -1,38 +1,11 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import type { AxiosInstance } from "axios";
 
-// Mocks
-const mockAuthStore = {
-  state: {
-    accessToken: "initial-access-token" as string | null,
-    refreshToken: "initial-refresh-token" as string | null,
-  },
-  setAccessToken: vi.fn(),
-  setRefreshToken: vi.fn(),
-  logout: vi.fn(),
-};
+// Mock $fetch (Nuxt global used by the plugin for token refresh)
+const mock$fetch = vi.fn();
+(globalThis as unknown as Record<string, unknown>).$fetch = mock$fetch;
 
-vi.mock("@auth/stores/auth.ts", () => ({
-  useAuthStore: () => mockAuthStore,
-}));
-
-let mockRefreshShouldFail = false;
-
-vi.mock("@core/libs/api/auth", () => ({
-  createAuthApi: () => ({
-    refresh: vi.fn().mockImplementation(() => {
-      if (mockRefreshShouldFail) {
-        return Promise.reject(new Error("Refresh failed"));
-      }
-      return Promise.resolve({
-        accessToken: "new-access-token",
-        refreshToken: "new-refresh-token",
-      });
-    }),
-  }),
-}));
-
-// Import after mocks
+// Import after globals are set
 import pluginFactory from "./00.axios";
 
 // Helper type for the plugin result
@@ -47,16 +20,24 @@ const createPluginInstance = (): PluginResult => {
 
 describe("Axios Plugin", () => {
   let axiosInstance: AxiosInstance;
+  const originalLocation = window.location;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    mockAuthStore.state.accessToken = "initial-access-token";
-    mockAuthStore.state.refreshToken = "initial-refresh-token";
-    mockRefreshShouldFail = false;
+    mock$fetch.mockReset();
+
+    // Replace window.location with a plain object to track href changes
+    // @ts-expect-error -- happy-dom requires delete before reassign
+    delete window.location;
+    window.location = { href: "" } as unknown as Location;
 
     // Execute plugin and get axios instance
     const result = createPluginInstance();
     axiosInstance = result.provide.axios;
+  });
+
+  afterEach(() => {
+    window.location = originalLocation;
   });
 
   describe("Plugin initialization", () => {
@@ -68,10 +49,14 @@ describe("Axios Plugin", () => {
       const result = createPluginInstance();
       expect(result.provide.axios).toBeDefined();
     });
+
+    it("should set withCredentials to true", () => {
+      expect(axiosInstance.defaults.withCredentials).toBe(true);
+    });
   });
 
-  describe("Request interceptor", () => {
-    it("should add Authorization header when token exists", async () => {
+  describe("Request handling", () => {
+    it("should use cookies (withCredentials) instead of Authorization header", async () => {
       const mockAdapter = vi.fn().mockResolvedValue({ data: {}, status: 200 });
       axiosInstance.defaults.adapter = mockAdapter;
 
@@ -79,25 +64,11 @@ describe("Axios Plugin", () => {
 
       expect(mockAdapter).toHaveBeenCalled();
       const requestConfig = mockAdapter.mock.calls[0]![0];
-      expect(requestConfig.headers.Authorization).toBe(
-        "Bearer initial-access-token",
-      );
-    });
-
-    it("should not add Authorization header when token is null", async () => {
-      mockAuthStore.state.accessToken = null;
-
-      const mockAdapter = vi.fn().mockResolvedValue({ data: {}, status: 200 });
-      axiosInstance.defaults.adapter = mockAdapter;
-
-      await axiosInstance.get("/test");
-
-      const requestConfig = mockAdapter.mock.calls[0]![0];
       expect(requestConfig.headers.Authorization).toBeUndefined();
     });
   });
 
-  describe("Response interceptor - Token refresh", () => {
+  describe("Response interceptor", () => {
     it("should pass through successful responses", async () => {
       axiosInstance.defaults.adapter = vi
         .fn()
@@ -108,19 +79,6 @@ describe("Axios Plugin", () => {
       expect(response.data).toEqual({ success: true });
     });
 
-    it("should logout when 401 and no refresh token", async () => {
-      mockAuthStore.state.refreshToken = null;
-
-      axiosInstance.defaults.adapter = vi.fn().mockRejectedValue({
-        response: { status: 401 },
-        config: { headers: {} },
-        isAxiosError: true,
-      });
-
-      await expect(axiosInstance.get("/test")).rejects.toBeDefined();
-      expect(mockAuthStore.logout).toHaveBeenCalled();
-    });
-
     it("should not retry on non-401 errors", async () => {
       axiosInstance.defaults.adapter = vi.fn().mockRejectedValue({
         response: { status: 500 },
@@ -129,12 +87,24 @@ describe("Axios Plugin", () => {
       });
 
       await expect(axiosInstance.get("/test")).rejects.toBeDefined();
-      expect(mockAuthStore.logout).not.toHaveBeenCalled();
+      expect(mock$fetch).not.toHaveBeenCalled();
+    });
+
+    it("should reject errors without config", async () => {
+      axiosInstance.defaults.adapter = vi.fn().mockRejectedValue({
+        response: { status: 401 },
+        isAxiosError: true,
+      });
+
+      await expect(axiosInstance.get("/test")).rejects.toBeDefined();
+      expect(mock$fetch).not.toHaveBeenCalled();
     });
   });
 
   describe("Token refresh flow", () => {
-    it("should attempt token refresh on 401 error", async () => {
+    it("should attempt token refresh via $fetch on 401 error", async () => {
+      mock$fetch.mockResolvedValueOnce({});
+
       let callCount = 0;
       axiosInstance.defaults.adapter = vi.fn().mockImplementation((config) => {
         callCount++;
@@ -148,19 +118,18 @@ describe("Axios Plugin", () => {
         return Promise.resolve({ data: { retried: true }, status: 200 });
       });
 
-      await axiosInstance.get("/test");
+      const response = await axiosInstance.get("/test");
 
       expect(callCount).toBe(2);
-      expect(mockAuthStore.setAccessToken).toHaveBeenCalledWith(
-        "new-access-token",
-      );
-      expect(mockAuthStore.setRefreshToken).toHaveBeenCalledWith(
-        "new-refresh-token",
-      );
+      expect(mock$fetch).toHaveBeenCalledWith("/api/auth/refresh", {
+        method: "POST",
+        credentials: "include",
+      });
+      expect(response.data).toEqual({ retried: true });
     });
 
-    it("should logout when refresh token fails", async () => {
-      mockRefreshShouldFail = true;
+    it("should redirect to login when refresh fails", async () => {
+      mock$fetch.mockRejectedValueOnce(new Error("Refresh failed"));
 
       axiosInstance.defaults.adapter = vi.fn().mockRejectedValue({
         response: { status: 401 },
@@ -169,7 +138,31 @@ describe("Axios Plugin", () => {
       });
 
       await expect(axiosInstance.get("/test")).rejects.toBeDefined();
-      expect(mockAuthStore.logout).toHaveBeenCalled();
+      expect(mock$fetch).toHaveBeenCalledWith("/api/auth/refresh", {
+        method: "POST",
+        credentials: "include",
+      });
+      expect(window.location.href).toBe("/auth/login");
+    });
+
+    it("should not retry a request that was already retried", async () => {
+      mock$fetch.mockResolvedValueOnce({});
+
+      let callCount = 0;
+      axiosInstance.defaults.adapter = vi.fn().mockImplementation((config) => {
+        callCount++;
+        return Promise.reject({
+          response: { status: 401 },
+          config: { ...config, headers: { ...config.headers } },
+          isAxiosError: true,
+        });
+      });
+
+      await expect(axiosInstance.get("/test")).rejects.toBeDefined();
+      // First call triggers refresh, second call after retry also fails with 401
+      // but should NOT trigger another refresh (already retried)
+      expect(callCount).toBe(2);
+      expect(mock$fetch).toHaveBeenCalledTimes(1);
     });
   });
 });

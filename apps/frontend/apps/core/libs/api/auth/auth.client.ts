@@ -14,7 +14,7 @@ export interface AuthApi {
   getMe: () => Promise<UserResponse>;
 }
 
-export const createAuthApi = (axiosInstance: AxiosInstance): AuthApi => ({
+export const createAuthApi = (_axiosInstance: AxiosInstance): AuthApi => ({
   login: async (payload: LoginDto) => {
     // Używamy $fetch z wewnętrznym Nuxt API dla SSR
     return await $fetch<AuthMessageResponse>("/api/auth/login", {

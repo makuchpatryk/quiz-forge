@@ -60,8 +60,11 @@ const mockApi = {
 
 // ── Helpers ───────────────────────────────────────────────
 
-function extractErrorMessage(err: any): string {
-  const msg = err.response?.data?.message;
+function extractErrorMessage(err: unknown): string {
+  const error = err as {
+    response?: { data?: { message?: string | string[] } };
+  };
+  const msg = error.response?.data?.message;
   return Array.isArray(msg) ? msg.join(", ") : msg || "quizSaveError";
 }
 
@@ -274,7 +277,7 @@ describe("Create Quiz — wywołanie API", () => {
       await mockApi.quiz.create(mapFormToCreateQuizDto(form));
       quizMessage.text = "quizSavedSuccess";
       quizMessage.success = true;
-    } catch (err: any) {
+    } catch (err: unknown) {
       quizMessage.text = extractErrorMessage(err);
       quizMessage.success = false;
     }
@@ -299,7 +302,7 @@ describe("Create Quiz — wywołanie API", () => {
     try {
       await mockApi.quiz.create(mapFormToCreateQuizDto(makeValidForm()));
       quizMessage.success = true;
-    } catch (err: any) {
+    } catch (err: unknown) {
       quizMessage.text = extractErrorMessage(err);
       quizMessage.success = false;
     }
@@ -315,7 +318,7 @@ describe("Create Quiz — wywołanie API", () => {
     try {
       await mockApi.quiz.create(mapFormToCreateQuizDto(makeValidForm()));
       quizMessage.success = true;
-    } catch (err: any) {
+    } catch (err: unknown) {
       quizMessage.text = extractErrorMessage(err);
       quizMessage.success = false;
     }
@@ -325,7 +328,7 @@ describe("Create Quiz — wywołanie API", () => {
   });
 
   it("powinno ustawiać isSubmitting=true podczas wysyłania i false po zakończeniu", async () => {
-    let resolveCreate: (value: any) => void;
+    let resolveCreate: (value: unknown) => void;
     const createPromise = new Promise((resolve) => {
       resolveCreate = resolve;
     });
@@ -364,7 +367,7 @@ describe("Create Quiz — wywołanie API", () => {
 
     try {
       await mockApi.quiz.create(mapFormToCreateQuizDto(makeValidForm()));
-    } catch (err: any) {
+    } catch (err: unknown) {
       quizMessage.text = extractErrorMessage(err);
       quizMessage.success = false;
     }

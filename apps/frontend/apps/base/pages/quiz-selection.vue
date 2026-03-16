@@ -18,11 +18,7 @@
       <div class="text-4xl mb-2">📝</div>
       <p>{{ $t("noQuizzesAvailable") }}</p>
     </div>
-    <NuxtLink
-      class="inline-block mt-6 text-blue-600 no-underline text-base hover:underline"
-      to="/menu"
-      >← {{ $t("backToMenu") }}</NuxtLink
-    >
+    <BackToDaschboard />
   </div>
 </template>
 

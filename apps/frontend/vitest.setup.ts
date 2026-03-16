@@ -1,8 +1,8 @@
-import { vi } from "vitest";
-
 // Mock Nuxt global composables
-(globalThis as any).defineNuxtPlugin = (fn: Function) => fn;
-(globalThis as any).useRuntimeConfig = () => ({
+(globalThis as unknown as Record<string, unknown>).defineNuxtPlugin = (
+  fn: (...args: unknown[]) => unknown,
+) => fn;
+(globalThis as unknown as Record<string, unknown>).useRuntimeConfig = () => ({
   public: {
     apiBaseUrl: "http://localhost:3000",
   },

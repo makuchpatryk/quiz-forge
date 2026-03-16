@@ -6,9 +6,10 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "start": "nuxt start",
+    "pretest": "nuxt prepare",
     "test": "vitest",
-    "test:run": "vitest run",
-    "lint": "eslint . --ext .ts,.vue"
+    "test:run": "nuxt prepare && vitest run",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^2.1.0",

@@ -21,7 +21,7 @@ const options = {
 };
 
 const AppDataSource = new DataSource(
-  options as DataSourceOptions & SeederOptions
+  options as DataSourceOptions & SeederOptions,
 );
 
 export default AppDataSource;

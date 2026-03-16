@@ -58,5 +58,5 @@ export class QuizService {
   }
 
   @OnEvent(events.RESPONSE_SUBMITTED)
-  checkQuizCompleted(payload: ResponseAddEvent) {}
+  checkQuizCompleted(_payload: ResponseAddEvent) {}
 }

@@ -19,7 +19,7 @@ export class QuestionService {
 
   async createQuestion(
     question: CreateQuestionDto,
-    quiz: Quiz
+    quiz: Quiz,
   ): Promise<Question> {
     const newQuestion = await this.questionRepository.save({
       question: question.question,

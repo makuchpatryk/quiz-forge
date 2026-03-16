@@ -11,6 +11,8 @@ export class UserMapper {
       updatedAt: orm.updatedAt,
       createdAt: orm.createdAt,
       password: orm.password,
+      provider: orm.provider,
+      providerId: orm.providerId,
     } as UserDomain;
   }
 
@@ -23,6 +25,8 @@ export class UserMapper {
     orm.updatedAt = user.updatedAt;
     orm.createdAt = user.createdAt;
     orm.role = user.role;
+    orm.provider = user.provider;
+    orm.providerId = user.providerId;
     return orm;
   }
 }

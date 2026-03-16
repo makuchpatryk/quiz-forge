@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
-import { UserRoles } from "./user.enum";
+import { UserRoles, AuthProvider } from "./user.enum";
 
 @Entity({ name: "users" })
 export class User extends BaseEntity {
@@ -29,11 +29,17 @@ export class User extends BaseEntity {
   email!: string;
 
   @ApiProperty({ description: "Hashed user password" })
-  @Column()
-  password!: string;
+  @Column({ type: "varchar", nullable: true })
+  password!: string | null;
 
   @Column({ type: "enum", enum: UserRoles, default: UserRoles.MEMBER })
   role!: UserRoles;
+
+  @Column({ type: "varchar", default: AuthProvider.LOCAL })
+  provider!: string;
+
+  @Column({ type: "varchar", nullable: true })
+  providerId!: string | null;
 
   @ApiProperty({ description: "When user was created" })
   @CreateDateColumn()

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Post } from "@nestjs/common";
 import { SETTINGS } from "../../app.utils";
 
 import { UserRegisterRequestDto } from "./dto/user-register.req.dto";
@@ -12,7 +12,7 @@ export class UserController {
   @Post("/register")
   async doUserRegistration(
     @Body(SETTINGS.VALIDATION_PIPE)
-    userRegister: UserRegisterRequestDto
+    userRegister: UserRegisterRequestDto,
   ): Promise<User> {
     return await this.userCreateUseCase.execute(userRegister);
   }

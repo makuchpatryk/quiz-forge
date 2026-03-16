@@ -11,7 +11,7 @@ import { UserRepository } from "../user/domain/user.repository";
 @Injectable()
 export class AdminRoleGuard implements CanActivate {
   constructor(
-    @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository
+    @Inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
   ) {}
 
   async canActivate(context: ExecutionContext) {
